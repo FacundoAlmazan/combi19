@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url("img/puntitos.png");
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+
+.login-box {
+  width: 520px;
+  height: auto;
+  background: rgba(80,10,11,0.3);
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
+  border:1px solid white;
+}
+
+.login-box label{ ;
+  background-color: rgba(250,250,250,1)
+  font-size:16px;   
+  border-radius: 10%;   
+  margin-right: 10px;   
+  cursor:pointer; 
+  margin-bottom: 20px;
+  top:50%;
+}   
+
+ input[type="file"]{
+   display:none; }
+
+.login-box .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 7px groove white;
+  position: absolute;
+  top: -50px;
+  left: calc(50%-50px);
+}
+
+.login-box h1 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.login-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.login-box input {
+  width: 100%;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.login-box input[type="date"] {
+  font-family: sans-serif;
+}
+
+.login-box button{
+  background-color: #ffc107;
+  color:black;
+  border:15px;
+  border-radius: 15px;
+  font-weight: bold;
+  margin-left: 70pt;
+  font-size: 17px;
+}
+.login-box button:hover{
+  background-color: yellow;
+  color:black;
+  font-weight: bold;
+}
+.login-box input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  background-color: maroon;
+  font-size: 18px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.login-box input[type="submit"]:hover {
+  cursor: pointer;
+  background: #ffc107;
+  color: #000;
+}
+
+.campoTexto{
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.login-box a {
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 20px;
+  color: gray;
+}
+
+.login-box a:hover {
+  color: white;
+}
+.gold-div
+{
+  justify-content: center;
+  align-items: center;
+}
+/* estilo de pie de pagina */

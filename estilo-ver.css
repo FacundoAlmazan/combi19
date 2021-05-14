@@ -1,0 +1,121 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	font-family: 'Roboto Mono', monospace;
+	background: url("img/puntitos.png");
+}
+
+
+ul {
+ 	list-style-type: none;
+  	margin: 0;
+ 	padding: 0;
+ 	overflow: hidden;
+  	background-image: linear-gradient(to right, rgba(80,10,11,0.3), rgba(240,240,240,0.2));
+	border:1px solid black;
+}
+
+li {
+  	float: left;
+}
+
+li a {
+	margin-top:2px;
+	height:67px;
+ 	display: block;
+  	color: white;
+  	text-align: center;
+  	padding: 14px 16px;
+  	text-decoration: none;
+  	font-size:20px;
+}
+
+li a:hover {
+  font-weight: bold;
+}
+
+li img{
+	margin:4px;
+	margin-right: 20px;
+	margin-left:4px;
+	height:60px;
+	border-radius: 40%;
+	border:2px solid rgba(240,240,240,0.3);
+}
+
+.logo{
+	margin:0px;
+	padding:0px;
+}
+
+.titulo{
+	position:relative;
+  	transform: translate(-50%, 0%);
+  	left:50%;
+	color:white;
+	text-align:center;
+	margin-top:50px;
+  	margin-bottom:10px;
+	width: 400px;
+  	text-align:center;
+  	padding:20px;
+}
+
+.content{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	position:relative;
+	height:auto;
+	left: 50%;
+	width:40%;
+  	transform: translate(-50%, 0%);
+	color:white;
+	text-align:center;
+	min-width:400px;
+  	padding:20px;
+  	background: rgba(0,0,0,0.2);
+ 	border: 1px solid black;
+}
+
+.campoTexto{
+  	border: none;
+  	border-bottom: 2px solid white;
+  	background: transparent;
+ 	height: 30px;
+ 	font-size: 20px;
+ 	margin-bottom:40px;
+ 	width: 350px;
+ 	color:rgba(230,240,230,0.5);
+ 	color:grey;
+}
+
+.baja{
+  	color:white;
+  	font-size: 18px;
+  	padding:12px;
+  	width:150px;
+  	background-color: rgba(240,0,0,1);
+}
+
+.baja:hover{
+	transition: .3s ease all;
+	cursor:pointer;
+	background-color:rgba(190,20,20,1);
+}
+
+.modificar{
+	margin-top:30px;
+	margin-bottom:20px;
+	color:white;
+	font-size: 18px;
+	padding:12px;
+	background-color: rgba(0,0,0,0.4);
+
+}
+.modificar:hover{
+	transition: .3s ease all;
+	cursor:pointer;
+	background-color:rgba(0,0,0,0.6);
+}

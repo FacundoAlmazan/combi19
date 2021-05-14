@@ -1,0 +1,125 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	font-family: 'Roboto Mono', monospace;
+	background: url("img/puntitos.png");
+}
+
+
+ul {
+ 	list-style-type: none;
+  	margin: 0;
+ 	padding: 0;
+ 	overflow: hidden;
+  	background-image: linear-gradient(to right, rgba(80,10,11,0.3), rgba(240,240,240,0.2));
+	border:1px solid black;
+}
+
+li {
+  	float: left;
+}
+
+li a {
+	margin-top:2px;
+	height:67px;
+ 	display: block;
+  	color: white;
+  	text-align: center;
+  	padding: 14px 16px;
+  	text-decoration: none;
+  	font-size:20px;
+}
+
+li a:hover {
+  font-weight: bold;
+}
+
+li img{
+	margin:4px;
+	margin-right: 20px;
+	margin-left:4px;
+	height:60px;
+	border-radius: 40%;
+	border:2px solid rgba(240,240,240,0.3);
+}
+
+.logo{
+	margin:0px;
+	padding:0px;
+}
+
+.content{
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height:auto;
+	left: 50%;
+  	width:50%;
+  	position:relative;
+  	transform: translate(-50%, 0%);
+  	min-width:600px;
+	background:rgba(0,0,0,0.5);
+	padding:40px;
+	border: 1px solid black;
+}
+
+.titulo{
+	color:white;
+	text-align:center;
+	background: rgba(240,240,240,0.2);
+	margin:10px;
+	height:90px;
+	width: 420px;
+  	border:1px groove black;
+  	padding:20px;
+  	word-wrap:break-word;
+  	overflow-x:hidden;
+}
+
+.agregar{
+	height:60px;
+	margin-left:100px;
+	margin-top:25px;
+	display:inline;
+	float:right;
+  	color:white;
+  	font-size: 18px;
+  	padding:12px;
+  	background-color: rgba(0,0,0,0.4);
+
+}
+.agregar:hover{
+  	transition: .3s ease all;
+  	cursor:pointer;
+  	background-color:rgba(0,240,0,0.2);
+}
+
+.item{
+	display:block;	
+	text-decoration:none;
+	border: 1px solid black;
+	margin:10px;
+	opacity:0.7;
+	background: white;
+	min-width:500px;
+}
+
+.item:hover{	
+	opacity:1;
+	border: 2px solid black;
+}
+
+.item p{
+	font-size:20px;
+	font-weight:bold;
+	color: black;
+	opacity:1;
+	margin:14px;
+	word-wrap: break-word;
+}
+
+.item p:hover{
+	text-shadow: 0 0 8px white, 0 0 4px black;
+	opacity:1;
+}
