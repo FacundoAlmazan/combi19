@@ -26,7 +26,7 @@
 		
 	function validarCombi(){
 		if(combi.value =="x"){
-			alert("Selecciona una combi");
+			alert("Selecciona una peluca");
 			return false;
 		}
 		return true;
