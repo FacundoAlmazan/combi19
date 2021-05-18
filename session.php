@@ -38,7 +38,7 @@ class autenticacion {
             }
             else{
               include "index.php";
-              echo '<script language="javascript">alert("Clave incorrecta :(");</script>';
+              echo '<script language="javascript">alert("Clave incorrecta");</script>';
               return false;
             }
           }
