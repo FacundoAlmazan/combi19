@@ -1,3 +1,9 @@
+<?php
+	include_once "session.php";
+	$a = new autenticacion();
+	$a->validar_sesion();
+	$a->validar_rol(3);
+?>
 <!DOCTYPE html>
 <html>
 <head>
