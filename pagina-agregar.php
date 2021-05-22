@@ -22,7 +22,8 @@
 		  		$categoria = "lugares";
 		  		break;
 	  		case '4':
-		  		$categoria = "rutas";
+		  		$categoria = "rutas"; ?>
+			   <script type="text/javascript" src="scripts/script-agregarRuta.js"></script> <?php
 		  		break;
 	  	}
     } 

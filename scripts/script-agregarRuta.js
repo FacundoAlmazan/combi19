@@ -67,6 +67,9 @@
 		if (window.location.hash == "#agregado"){
 			alert("La ruta se ha agregado con exito");
 		}
+		if (window.location.hash == "#error"){
+			alert("El origen y el destino no pueden ser el mismo");
+		}
 	}
 
 	window.onload = function(){

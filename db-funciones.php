@@ -125,6 +125,8 @@
 					echo $respuesta['modelo'];
 					echo " ASIENTOS:";
 					echo $respuesta['cantasientos'];
+					echo " IDENTIFICACION:";
+					echo $respuesta['identificacion'];
 					echo" CHOFER:";
 					echo $respuesta['chofer'];
 					echo" TIPO:";
