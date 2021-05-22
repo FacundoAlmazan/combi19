@@ -396,9 +396,16 @@
 
 	function updatearChofer($id,$nombre,$apellido,$mail,$telefono){
 		session_start();
+		$traer_datos="SELECT * from choferes where id='$id'";
+		$datosviejos=consultar($traer_datos);
+		foreach ($datosviejos as $datosviejos){
+			$emailviejo= $datosviejos['email'];
+		}
 		$nombrecompleto=$apellido.', '.$nombre;
 		$consulta= "UPDATE choferes SET nombrecompleto='$nombrecompleto', apellido='$apellido', nombre='$nombre', email='$mail', telefono='$telefono' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
+		$consultaUsuario= "UPDATE usuarios SET email='$mail , nombre='$nombre', apellido='$apellido' , email='$mail' where email='$emailviejo'";
+		$respuestaUsuario=consultar($consultaUsuario);
 			return true;
 	}
 
