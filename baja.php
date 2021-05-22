@@ -55,7 +55,7 @@ $id=$_GET['id'];
              }
             }
         if(isset($nombre2)){
-            echo'<script> alert ("Este chofer forma esta a cargo de una combi, no se puede eliminar");</script>';
+            echo'<script> alert ("Este chofer esta a cargo de una combi, no se puede eliminar");</script>';
             include "pagina-homeAdmin.php";
             return false;
         }
