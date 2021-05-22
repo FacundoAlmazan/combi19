@@ -404,7 +404,7 @@
 		$nombrecompleto=$apellido.', '.$nombre;
 		$consulta= "UPDATE choferes SET nombrecompleto='$nombrecompleto', apellido='$apellido', nombre='$nombre', email='$mail', telefono='$telefono' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
-		$consultaUsuario= "UPDATE usuarios SET email='$mail , nombre='$nombre', apellido='$apellido' , email='$mail' where email='$emailviejo'";
+		$consultaUsuario= "UPDATE usuarios SET email='$mail' , nombre='$nombre', apellido='$apellido' , email='$mail' where email='$emailviejo'";
 		$respuestaUsuario=consultar($consultaUsuario);
 			return true;
 	}
