@@ -2,7 +2,7 @@
 	include_once "session.php";
 	$a = new autenticacion();
 	$a->validar_sesion();
-	$a->validar_rol(3);
+	$a->validar_rol(1);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,9 +28,6 @@
 					</a>
 					<a class="item" href="pagina-listar.php?tipo=3">
 						<p class="item">LUGARES</p>
-					</a>
-					<a class="item" href="pagina-listar.php?tipo=5">
-						<p class="item">VIAJES</p>
 					</a>
 				</div>
 				<div class="column">

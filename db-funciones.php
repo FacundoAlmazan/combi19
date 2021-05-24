@@ -136,6 +136,37 @@
 		}
 	}
 
+	function listarViajes(){
+		$tipo=5;
+		$consulta= "SELECT * from viajes";
+		$respuesta=consultar($consulta);
+		if($respuesta){
+			foreach ($respuesta as $respuesta){
+			   	echo '<a class="item"';
+			    echo' href="pagina-ver.php?tipo=';
+			   	echo $tipo;
+			   	echo"&id=";
+			   	echo $respuesta['id'];
+			   	echo '">'; 
+				echo' <div class="column">
+					<p>RUTA : ';
+					$idR=$respuesta['idRuta'];
+					$consulta1= "SELECT * from rutas where id='$idR'";
+					$ans=consultar($consulta1);
+					foreach($ans as $ans){
+						echo $ans['origen']. " ---> " . $ans['destino'];
+					}
+					echo " PRECIO:";
+					echo $respuesta['precio'];
+					echo " FECHA:";
+					echo $respuesta['fecha'];
+					echo" HORA:";
+					echo $respuesta['hora'];
+				echo "</p></div></a>";
+		   	}
+		}
+	}
+
 	function listarDatos($tipo){
 		if($tipo=='1'){
           listarChoferes();
@@ -148,6 +179,9 @@
 		}
 		elseif ($tipo=='4'){
           listarRutas();
+		}
+		elseif ($tipo=='5'){
+			listarViajes();
 		}
 	}
 
@@ -381,7 +415,11 @@
 		$consulta= "INSERT INTO combis(identificacion,modelo, patente, cantasientos, chofer, tipo) VALUES('$id','$modelo','$patente','$asientos','$chofer','$tipo')";
 		consultar($consulta);
 	}
-
+	function insertarViaje($precio,$fecha,$hora,$ruta){
+		session_start();
+		$consulta= "INSERT INTO viajes(precio,fecha,hora,idRuta) VALUES('$precio','$fecha','$hora','$ruta')";
+		consultar($consulta);
+	}
 	function insertarLugar($lugar,$provincia){
 		session_start();
 		$consulta= "INSERT INTO lugares(lugar, provincia) VALUES('$lugar','$provincia')";
@@ -569,6 +607,34 @@
 	<?php
 	}
 
+	function agregarViaje(){
+		?>
+		<form method="POST" onsubmit="return checkRuta()" action="db-agregarViaje.php">
+			<h3> Ruta </h3>
+			<select id="ruta" type="text" class="campoTexto" name="ruta">
+				<option value="x">SELECCIONE UNA RUTA</option>
+				<?php
+				$consulta = "SELECT * FROM rutas";
+				$rutas = consultar($consulta);
+          		while ($valores = mysqli_fetch_array($rutas)) {
+            		echo '<option value="'.$valores[id].'">'.$valores[origen].' ---> '.$valores[destino].'</option>';
+          		}
+				?>
+			</select>
+			<h3>Precio:</h3>
+			<input id="precio" type="number" class="campoTexto" name="precio">
+			<h3>Fecha:</h3>
+			<input id="fecha" type="date" class="campoTexto" name="fecha">
+			<h3>Hora:</h3>
+			<input id="hora" type="text" class="campoTexto" name="hora" placeholder="hs:mn:sg">
+			<br>
+			<input type="submit" value="AGREGAR" class="modificar">
+		</form>
+	</div>
+	<script type="text/javascript" src="scripts/script-agregarRuta.js"></script>
+	<?php
+	}
+
 	function agregar($tipo){
 		switch($tipo){
 			case 1:
@@ -582,6 +648,9 @@
 				break;
 			case 4:
 				agregarRuta();
+				break;
+			case 5:
+				agregarViaje();
 				break;
 		}
 	}

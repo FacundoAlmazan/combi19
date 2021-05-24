@@ -25,6 +25,9 @@
 		  		$categoria = "rutas"; ?>
 			   <script type="text/javascript" src="scripts/script-agregarRuta.js"></script> <?php
 		  		break;
+		    case '5':
+				$categoria= "viajes";
+				break;
 	  	}
     } 
     ?>

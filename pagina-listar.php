@@ -24,6 +24,9 @@
 	  		case '4':
 		  		$categoria="Rutas";
 		  		break;
+		    case '5':
+	     		$categoria="Viajes";
+				break;
 	  	}
     } 
     ?>
