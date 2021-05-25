@@ -452,6 +452,11 @@
 		$consulta= "INSERT INTO lugares(lugar, provincia) VALUES('$lugar','$provincia')";
 		consultar($consulta);
 	}
+	function insertarInsumo($nombre,$precio,$tipo){
+		session_start();
+		$consulta= "INSERT INTO insumos(nombre,precio,tipo) VALUES('$nombre','$precio','$tipo')";
+		consultar($consulta);
+	}
 
 	function insertarRuta($origen,$destino,$combi,$km,$duracion){
 		session_start();
@@ -661,7 +666,25 @@
 	<script type="text/javascript" src="scripts/script-agregarRuta.js"></script>
 	<?php
 	}
-
+	function agregarInsumo(){
+		?>
+		<form method="POST" onsubmit="return checkInsumo()" action="db-agregarInsumo.php">
+			<h3>Nombre:</h3>
+			<input id=nombre type="text" class="campoTexto" name="nombre">
+			<h3>Precio:</h3>
+			<input id=precio type="number" class="campoTexto" name="precio">
+			<h3>Tipo:</h3>
+			<select id="tipo" type="text" class="campoTexto" name="tipo">
+				<option value="SALADO">Salado</option>
+				<option value="DULCE">Dulce</option>
+			</select>
+			<br>
+			<input type="submit" value="AGREGAR" class="modificar">
+		</form>
+	</div>
+	<script type="text/javascript" src="scripts/script-agregarInsumo.js"></script>
+	<?php
+	}
 	function agregar($tipo){
 		switch($tipo){
 			case 1:
@@ -679,6 +702,9 @@
 			case 5:
 				agregarViaje();
 				break;
+		    case 6:
+				agregarInsumo();
+                break;
 		}
 	}
 

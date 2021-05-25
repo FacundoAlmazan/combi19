@@ -28,6 +28,8 @@
 		    case '5':
 				$categoria= "viajes";
 				break;
+		    case '6':
+				$categoria="insumos";
 	  	}
     } 
     ?>
