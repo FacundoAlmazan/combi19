@@ -29,8 +29,8 @@
 					<a class="item" href="pagina-listar.php?tipo=3">
 						<p class="item">LUGARES</p>
 					</a>
-					<a class="item" href="pagina-listar.php?tipo=5">
-						<p class="item">VIAJES</p>
+					<a class="item" href="pagina-listar.php?tipo=6">
+						<p class="item">INSUMOS</p>
 					</a>
 				</div>
 				<div class="column">
@@ -39,6 +39,9 @@
 					</a>
 					<a class="item" href="pagina-listar.php?tipo=4">
 						<p class="item">RUTAS</p>
+					</a>
+					<a class="item" href="pagina-listar.php?tipo=5">
+						<p class="item">VIAJES</p>
 					</a>
 				</div>
 			</div>

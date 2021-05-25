@@ -27,6 +27,8 @@
 		    case '5':
 	     		$categoria="Viajes";
 				break;
+		    case '6':
+				$categoria="Insumos";
 	  	}
     } 
     ?>

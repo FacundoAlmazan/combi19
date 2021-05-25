@@ -166,6 +166,30 @@
 		   	}
 		}
 	}
+    
+	function listarInsumos(){
+		$tipo=6;
+		$consulta= "SELECT * from insumos";
+		$respuesta=consultar($consulta);
+		if($respuesta){
+			foreach ($respuesta as $respuesta){
+			   	echo '<a class="item"';
+			    echo' href="pagina-ver.php?tipo=';
+			   	echo $tipo;
+			  	echo"&id=";
+			   	echo $respuesta['id'];
+			   	echo '">'; 
+				echo' <div class="column">
+					<p>NOMBRE:';
+					echo $respuesta['nombre'];
+					echo " TIPO:";
+					echo $respuesta['tipo'];
+					echo " PRECIO:";
+					echo $respuesta['precio'];
+				echo "</p></div></a>";
+		    }
+		}
+	}
 
 	function listarDatos($tipo){
 		if($tipo=='1'){
@@ -182,6 +206,9 @@
 		}
 		elseif ($tipo=='5'){
 			listarViajes();
+		}
+		elseif ($tipo=='6'){
+			listarInsumos();
 		}
 	}
 

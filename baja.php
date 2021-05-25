@@ -66,6 +66,9 @@ $id=$_GET['id'];
     elseif($tipo=='4'){
         $consulta="DELETE from rutas where (id='$id')";
     }
+    elseif ($tipo=='5'){
+        
+    }
 $resultado= consultar($consulta);
 include "pagina-homeAdmin.php";
 ?>
