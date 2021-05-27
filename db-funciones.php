@@ -162,6 +162,20 @@
 					echo $respuesta['fecha'];
 					echo" HORA:";
 					echo $respuesta['hora'];
+					echo " INSUMOS:";
+					$str=" ";
+					$insumos=explode(",",$respuesta['insumos']);
+					foreach ($insumos as $insumos){
+						$insumoInt= (int)$insumos;
+						$consultaIns= "SELECT * from insumos where id='$insumoInt'";
+						$resultadoIns= consultar($consultaIns);
+						foreach($resultadoIns as $resultadoIns){
+							$str= $str . " " . $resultadoIns['nombre']."+";
+
+						}
+					}
+					$strInsumos=rtrim($str,"+");
+					echo $strInsumos;
 				echo "</p></div></a>";
 		   	}
 		}
@@ -442,9 +456,9 @@
 		$consulta= "INSERT INTO combis(identificacion,modelo, patente, cantasientos, chofer, tipo) VALUES('$id','$modelo','$patente','$asientos','$chofer','$tipo')";
 		consultar($consulta);
 	}
-	function insertarViaje($precio,$fecha,$hora,$ruta){
+	function insertarViaje($precio,$fecha,$hora,$ruta,$ins){
 		session_start();
-		$consulta= "INSERT INTO viajes(precio,fecha,hora,idRuta) VALUES('$precio','$fecha','$hora','$ruta')";
+		$consulta= "INSERT INTO viajes(precio,fecha,hora,idRuta,estado,insumos) VALUES('$precio','$fecha','$hora','$ruta',1,'$ins')";
 		consultar($consulta);
 	}
 	function insertarLugar($lugar,$provincia){
@@ -659,6 +673,22 @@
 			<input id="fecha" type="date" class="campoTexto" name="fecha">
 			<h3>Hora:</h3>
 			<input id="hora" type="text" class="campoTexto" name="hora" placeholder="hs:mn:sg">
+			<h3>Insumos:</h3>
+				<?php
+				$consulta = "SELECT * FROM insumos";
+				$insumos = consultar($consulta);
+          		while ($valores = mysqli_fetch_array($insumos)) {
+					  echo '
+					  <input type="checkbox" name="insu[]" value="';
+					  echo $valores['id'];
+					  echo'">';
+					  echo $valores['nombre'];
+					  echo '</input>
+';
+          		}
+				  echo'<br>';
+				?>
+			</select>
 			<br>
 			<input type="submit" value="AGREGAR" class="modificar">
 		</form>
