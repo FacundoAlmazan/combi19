@@ -5,7 +5,7 @@
   $nombre = $_POST['nombre'];
   $apellido = $_POST['apellido'];
   $email = $_POST['email'];
-  $dni=$_POST['dni'];
+  $dni = $_POST['dni'];
   $nombreValidacion="ASDASKDALhasjdhasjkdasjd";
   $nacimiento=$_POST['nacimiento'];
   $consulta= "SELECT * from usuarios where nombreusuario='$user'";
@@ -30,6 +30,6 @@
     <?php
   }
   else{
-  EnviarRegistro($nombre,$apellido,$user,$email,$user,$pass,$nacimiento);
+  EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
   }
 ?>
