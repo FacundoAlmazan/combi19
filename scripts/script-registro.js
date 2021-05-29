@@ -1,6 +1,6 @@
 var usuario=document.getElementById("user");
 var contraseña=document.getElementById("pw");
-var nacimiento=document.getElementById("nacimiento").value;
+var nacimiento=document.getElementById("nacimiento");
 var apellido=document.getElementById("apellido");
 var nombre=document.getElementById("nombre");
 var dni=document.getElementById("dni");
@@ -81,13 +81,13 @@ function validarContraseña(){
 }
 
 function validarEdad(){
-	if(!nacimiento){
+	if(nacimiento.value==""){
 		alert("ingrese su fecha de nacimiento");
 		return false;
 	}
-	year = nacimiento.substr(0,4);
-	month = nacimiento.substr(-5,2);
-	day = nacimiento.substr(-2,4);
+	year = nacimiento.value.substr(0,4);
+	month = nacimiento.value.substr(-5,2);
+	day = nacimiento.value.substr(-2,4);
 	intYear = parseInt(year, 10);
 	intMonth = parseInt(month, 10);
 	intDay = parseInt(day, 10);
