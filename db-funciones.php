@@ -449,7 +449,7 @@
 				</form>
 				<button class="baja" onclick= "if (confirm('Seguro que quieres dar de baja?')) window.location.href=
 				<?php
-				echo "'baja.php?tipo=4&id=$id'";
+				echo "'baja.php?tipo=5&id=$id'";
 				echo'">DAR DE BAJA</button>';
 			}
 		}
