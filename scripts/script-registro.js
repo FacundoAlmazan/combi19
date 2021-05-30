@@ -6,6 +6,34 @@ var nombre=document.getElementById("nombre");
 var dni=document.getElementById("dni");
 var email= document.getElementById("email");
 var estado= true;
+
+function validarNombre(){
+	if(nombre.value==""){
+		alert("El nombre no puede estar vacio");
+		estado=false;
+		return false;
+	}
+	if(!validarLetrasYEspacios(nombre.value)){
+        alert("El nombre debe ser alfanumerico");
+		estado=false;
+		return false;
+	}
+	return true;
+}
+function validarApellido(){
+	if(apellido.value==""){
+		alert("El apellido no puede estar vacio");
+		estado=false;
+		return false;
+	}
+	if(!validarLetrasYEspacios(apellido.value)){
+        alert("El apellido debe ser alfanumerico");
+		estado=false;
+		return false;
+	}
+	return true;
+}
+
 function validarDni(){
 	if(dni.value < 1){
 		alert("El dni no puede estar vacio");
@@ -52,6 +80,40 @@ function validarContraseña(){
 	
 }
 
+function validarEdad(){
+	if(nacimiento.value==""){
+		alert("ingrese su fecha de nacimiento");
+		return false;
+	}
+	year = nacimiento.value.substr(0,4);
+	month = nacimiento.value.substr(-5,2);
+	day = nacimiento.value.substr(-2,4);
+	intYear = parseInt(year, 10);
+	intMonth = parseInt(month, 10);
+	intDay = parseInt(day, 10);
+	today = new Date();
+	age = today.getFullYear() - year;
+	m = today.getMonth()+1 - intMonth;
+	if (m<0 || (m===0 && today.getDate() < intDay)) {
+		age--;
+	}
+	if(age < 18){
+		alert("debes ser mayor de 18 años registrarte en el sitio");
+		return false;
+	}
+	return true;
+}
+
+function validarLetrasYEspacios(String){
+    var patron= /^[a-zA-Z\s]*$/;
+    if (patron.test(String)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function validarAlfanumericos(String){
     var patron= /^[a-zA-Z0-9]*$/;
     if (patron.test(String)){
@@ -61,66 +123,6 @@ function validarAlfanumericos(String){
         return false;
     }
 }
-function validarNombre(){
-	if(nombre.value==""){
-		alert("El nombre no puede estar vacio");
-		estado=false;
-		return false;
-	}
-	if(!validarAlfanumericos(nombre.value)){
-        alert("El nombre debe ser alfanumerico");
-		estado=false;
-		return false;
-	}
-	return true;
-}
-function validarApellido(){
-	if(apellido.value==""){
-		alert("El apellido no puede estar vacio");
-		estado=false;
-		return false;
-	}
-	if(!validarAlfanumericos(apellido.value)){
-        alert("El apellido debe ser alfanumerico");
-		estado=false;
-		return false;
-	}
-	return true;
-}
-function validadEdad(){
-	var anio= nacimiento.getFullYear();
-	if ((anio < 2004) && (anio > 1800)){
-		alert("Aniooo biieen");
-		return false;
-	}
-	else{
-		alert("anio maaal :c");
-		return false;
-	}
-}
-function validarEdad2(){
-	var AnyoFecha = nacimiento.getFullYear();
-	var MesFecha = nacimiento.getMonth();
-	var DiaFecha = nacimiento.getDate();
-	horaA = new Date();
-	horaA = Date.now();
-	var AnyoLim = 2003;
-	if (AnyoFecha>1000){
-		if(AnyoLim>AnyoFecha){
-			alert(horaA);
-			return true;
-		}
-		else{
-			alert("No se pueden registrar menores de edad");
-			return false;
-		}
-	}
-	else{
-		alert("Proporcione una fecha valida");
-		return false;
-	}
-}
-
 
 function validarTamaño(String){
   if(String.length >= 6){
@@ -132,6 +134,6 @@ function validarTamaño(String){
 }
 
 function checkRegister(){
-	return validarNombre() && validarApellido() && validarEmail() && validarDni() && validadEdad();
+	return validarNombre() &&  validarApellido() &&  validarEmail() &&  validarDni() &&  validarEdad() && validarUsuario() && validarContraseña();
 }
 

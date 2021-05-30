@@ -27,7 +27,7 @@
 			}
 		}
 		else{
-            echo '<script language="javascript">alert("El registro fallo: Nombredeusuario ya existente");</script>';
+            echo '<script language="javascript">alert("El registro fallo: Nombre de usuario ya existente");</script>';
 			include "pagina-registro.php";
 			return false;
 		}
