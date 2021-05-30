@@ -352,7 +352,7 @@
 				echo $id; echo'">';?>
 					<h3> Origen </h3>
 					<select id=origen type="text" class="campoTexto" name="origen">
-						<option value=<?php echo'"'; echo$datos['origen']; echo '">';
+						<option value=<?php echo'"'; echo $datos['origen']; echo '">';
 						echo $datos['origen']; ?> </option>
 						<?php
 						$consulta = "SELECT lugar FROM lugares";
@@ -364,7 +364,7 @@
 					</select>
 					<h3>Destino:</h3>
 					<select id=destino type="text" class="campoTexto" name="destino">
-						<option value=<?php echo'"'; echo$datos['destino']; echo '">';
+						<option value=<?php echo'"'; echo $datos['destino']; echo '">';
 						echo $datos['destino']; ?> </option>
 						<?php
 						$consulta = "SELECT lugar FROM lugares";
@@ -376,7 +376,7 @@
 					</select>
 					<h3>Combi:</h3>
 					<select id=combi type="text" class="campoTexto" name="combi">
-						<option value=<?php echo'"'; echo$datos['combi']; echo '">';
+						<option value=<?php echo'"'; echo $datos['combi']; echo '">';
 						echo $datos['combi']; ?> </option>
 						<?php
 						$consulta = "SELECT identificacion FROM combis";
@@ -410,19 +410,112 @@
 		<script type="text/javascript" src="scripts/script-agregarRuta.js"></script>
 		<?php
 	}
+	function detalleViaje($id){
+		$consulta= "SELECT * from viajes where (id='$id')";
+		$respuesta = consultar($consulta);
+		$datos = $respuesta;
+		if($respuesta){
+			foreach ($datos as $datos){
+				echo '<form method="POST" onsubmit="return checkViaje()" action="db-modificarViaje.php?id=';
+				echo $id; echo'">';?>
+					<h3> Ruta </h3>
+					<select id=ruta type="text" class="campoTexto" name="ruta">
+						<option value=<?php echo'"'; echo $datos['idRuta']; echo '">';
+						echo $datos['idRuta']; ?> </option>
+						<?php
+						$consulta = "SELECT idRuta FROM viajes";
+						$rutas = consultar($consulta);
+		          		while ($valores = mysqli_fetch_array($rutas)) {
+		            		echo '<option value="'.$valores[idRuta].'">'.$valores[idRuta].'</option>';
+		          		}
+						?>
+					</select>
+				<?php
+					echo '<h3>Precio:</h3>
+					<input id="precio" type="number" class="campoTexto" name="precio" value="';
+					echo $datos['precio'];
+					echo '">';
+					echo '<h3>Fecha:</h3>
+					<input id=fecha type="date" class="campoTexto" name="fecha" value="';
+					echo $datos['fecha'];
+					echo '">';
+					echo '<h3>Hora:</h3>
+					<input id="hora" type="text" class="campoTexto" name="hora" value="';
+					echo $datos['hora'];
+					echo '">';
+					?>
+					<br>
+					<input type="submit" value="GUARDAR" class="modificar" onclick="return confirm('¿Seguro que quieres modificar?')">
+				</form>
+				<button class="baja" onclick= "if (confirm('Seguro que quieres dar de baja?')) window.location.href=
+				<?php
+				echo "'baja.php?tipo=4&id=$id'";
+				echo'">DAR DE BAJA</button>';
+			}
+		}
+				?>
+			</div>
+		<script type="text/javascript" src="scripts/script-agregarViaje.js"></script>
+		<?php
+	}
+
+	function detalleInsumo($id){
+		$consulta= "SELECT * from insumos where (id='$id')";
+		$respuesta = consultar($consulta);
+		$datos = $respuesta;
+		if($respuesta){
+			foreach ($datos as $datos){
+				echo '<form method="POST" onsubmit="return checkInsumo()" action="db-modificarInsumo.php?id=';
+				echo $id; echo'">';
+					echo '<h3>Nombre:</h3>
+					<input id="nombre" type="text" class="campoTexto" name="nombre" value="';
+					echo $datos['nombre'];
+					echo '">';
+					echo '<h3>Precio:</h3>
+					<input id="precio" type="number" class="campoTexto" name="precio" value="';
+					echo $datos['precio'];
+					echo '">';
+					?>
+					<h3>Tipo:</h3>
+					<select id="tipo" type="text" class="campoTexto" name="tipo">
+						<option value=<?php echo'"'; echo $datos['tipo']; echo '">';
+								echo $datos['tipo']; ?> </option>
+						<option value="SALADO">Salado</option>
+						<option value="DULCE">Dulce</option>
+					</select>
+					<br>
+					<input type="submit" value="GUARDAR" class="modificar" onclick="return confirm('¿Seguro que quieres modificar?')">
+				</form>
+				<button class="baja" onclick= "if (confirm('Seguro que quieres dar de baja?')) window.location.href=
+				<?php
+				echo "'baja.php?tipo=6&id=$id'";
+				echo'">DAR DE BAJA</button>';
+			}
+		}
+		?>
+	</div>
+	<script type="text/javascript" src="scripts/script-agregarInsumo.js"></script>
+	<?php
+	}
 
 	function verDetalle($id,$tipo){
 		if($tipo=='1'){
 			detalleChofer($id);
 		  }
-		  elseif ($tipo=='2'){
+		elseif ($tipo=='2'){
 			detalleCombi($id);
 		  }
-		  elseif ($tipo=='3'){
+		elseif ($tipo=='3'){
 			detalleLugar($id);
 		  }
-		  elseif ($tipo=='4'){
+		elseif ($tipo=='4'){
 			detalleRuta($id);
+		  }
+		elseif ($tipo=='5'){
+			detalleViaje($id);
+		  }
+		elseif ($tipo=='6'){
+			detalleInsumo($id);
 		  }
 	}
 
@@ -505,6 +598,26 @@
 	function updatearCombi($id, $modelo, $patente, $cantasientos, $chofer, $tipo,$idex){
 		session_start();
 		$consulta ="UPDATE combis SET identificacion='$idex', modelo='$modelo', patente='$patente', cantasientos='$cantasientos', tipo='$tipo', chofer= '$chofer'  WHERE (identificacion='$id')";
+		$respuesta=consultar($consulta);
+		if($respuesta){  
+			return true; }
+		else{ 
+			return false;}
+	}
+
+	function updatearViaje($id, $ruta, $precio, $fecha, $hora){
+		session_start();
+		$consulta ="UPDATE viajes SET idRuta='$ruta', precio='$precio', fecha='$fecha', hora='$hora' WHERE (id='$id')";
+		$respuesta=consultar($consulta);
+		if($respuesta){  
+			return true; }
+		else{ 
+			return false;}
+	}
+
+	function updatearInsumo($id, $nombre, $precio, $tipo){
+		session_start();
+		$consulta ="UPDATE insumos SET nombre='$nombre', precio='$precio', tipo='$tipo' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
 		if($respuesta){  
 			return true; }

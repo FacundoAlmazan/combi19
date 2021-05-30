@@ -24,6 +24,12 @@
 	  		case '4':
 		  		$categoria="ruta";
 		  		break;
+			case '5':
+				$categoria="viaje";
+				break;
+			case '6':
+				$categoria="insumo";
+				break;
 	  	}
   	} 
 	?>
