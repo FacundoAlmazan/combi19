@@ -140,6 +140,7 @@
 		$tipo=5;
 		$consulta= "SELECT * from viajes";
 		$respuesta=consultar($consulta);
+		$rest= $respuesta;
 		if($respuesta){
 			foreach ($respuesta as $respuesta){
 			   	echo '<a class="item"';
@@ -179,12 +180,16 @@
 				echo "</p></div></a>";
 		   	}
 		}
+		if(mysqli_num_rows ($rest) === 0){
+			echo '<h2 style="color:white">No hay viajes en el catálogo</h2>';
+		}
 	}
     
 	function listarInsumos(){
 		$tipo=6;
 		$consulta= "SELECT * from insumos";
 		$respuesta=consultar($consulta);
+		$rest= $respuesta;
 		if($respuesta){
 			foreach ($respuesta as $respuesta){
 			   	echo '<a class="item"';
@@ -203,7 +208,11 @@
 				echo "</p></div></a>";
 		    }
 		}
+		if(mysqli_num_rows ($rest) === 0){
+			echo '<h2 style="color:white">No hay insumos en el catálogo</h2>';
+		}
 	}
+
 
 	function listarDatos($tipo){
 		if($tipo=='1'){
