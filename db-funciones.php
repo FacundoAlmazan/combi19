@@ -563,6 +563,12 @@
 		$consulta= "INSERT INTO viajes(precio,fecha,hora,idRuta,estado,insumos) VALUES('$precio','$fecha','$hora','$ruta',1,'$ins')";
 		consultar($consulta);
 	}
+	function insertarComentario($slct, $mensaje){
+       session_start();
+	   $id= $_SESSION['id'];
+	   $consulta= "INSERT INTO comentarios(puntuacion,comentario,idUser) VALUES ('$slct','$mensaje','$id')";
+	   consultar($consulta);
+	}
 	function insertarLugar($lugar,$provincia){
 		session_start();
 		$consulta= "INSERT INTO lugares(lugar, provincia) VALUES('$lugar','$provincia')";
@@ -647,6 +653,25 @@
 		else{ 
 			return false;}
 	}
+
+	function updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento){
+			$gold= $_SESSION['gold'];
+			$tipo= $_SESSION['tipo'];
+			$id=$_SESSION['id'];
+			$consulta="UPDATE usuarios SET nombre='$nombre',apellido='$apellido',nombreusuario='$user',email='$email',dni='$dni',clave='$pass',nacimiento='$nacimiento',tipo='$tipo',gold='$gold' where (id='$id')";
+	    	$resultado=consultar($consulta);
+			if($resultado){
+				echo '<script language="javascript">alert("Se ha registrado exitosamente");</script>';
+				include "pagina-perfil.php";
+				//include "index.php";
+				return true;
+			}
+			else{
+				include "pagina-perfil.php";
+				return false;
+			}
+		}
+	
 
 	function agregarChofer(){
 		?>

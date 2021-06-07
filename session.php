@@ -15,7 +15,7 @@ class autenticacion {
                 $_SESSION['id']= $datos_usuario['id'];
                 $_SESSION['tipo']=$datos_usuario['tipo'];
                 $_SESSION['nombreusuario']=$datos_usuario['nombreusuario'];
-                $tipo=$_SESSION['tipo']=$datos_usuario['tipo'];
+                $tipo=$_SESSION['tipo'];
                 switch($tipo){
                   case 1:
                     header("location: pagina-homeUsuario.php");
