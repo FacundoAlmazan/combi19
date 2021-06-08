@@ -49,22 +49,22 @@
                 <form  method="POST" action="db-CambiarDatosUsuario.php">
                 <!-- ENTRADA DE NOMBRE DE USUARIO -->
 				<h1>NOMBRE </h1>
-                 <input id="nombre" type="text" class="campoTexto" name="nombre" placeholder="<?php echo $nombre ?>">
+                 <input id="nombre" type="text" class="campoTexto" name="nombre" value="<?php echo $nombre ?>">
 				 <h1>APELLIDO </h1>
-                 <input id="apellido" type="text" class="campoTexto" name="apellido" placeholder="<?php echo $apellido?>">
+                 <input id="apellido" type="text" class="campoTexto" name="apellido" value="<?php echo $apellido?>">
 				 <h1>EMAIL </h1>
-                 <input id="email" type="email" class="campoTexto" name="email" placeholder="<?php echo $email?>">
+                 <input id="email" type="email" class="campoTexto" name="email" value="<?php echo $email?>">
 				 <h1>NOMBRE DE USUARIO </h1>
-                 <input id="user" type="text" class="campoTexto" name="username" placeholder="<?php echo $user ?>">
+                 <input id="user" type="text" class="campoTexto" name="username" value="<?php echo $user ?>">
 				 <h1>CLAVE </h1>
                  <!-- ENTRADA DE CONTRASEÑA -->
-                 <input id="pw" type="password" class="campoTexto" name="password" placeholder="<?php echo $clave?>">
+                 <input id="pw" type="password" class="campoTexto" name="password" value="<?php echo $clave?>">
 				 <h1>DNI </h1>
-				 <input id="dni" type="number" maxlength="8" class="campoTexto" name="dni" placeholder="<?php echo $dni?>">
+				 <input id="dni" type="number" maxlength="8" class="campoTexto" name="dni" value="<?php echo $dni?>">
 				 <h1>FECHA DE NACIMIENTO </h1>
-                 <input id="nacimiento" type="date" class="campoTexto" name="nacimiento" placeholder="<?php echo $nacimiento?>">
+                 <input id="nacimiento" type="date" class="campoTexto" name="nacimiento" value="<?php echo $nacimiento?>">
         <!-- SUBMIT -->
-        <input type="submit" value="Ingresar">
+        <input type="submit" value="GUARDAR">
       </form>
 				</div>
 			</div>

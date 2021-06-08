@@ -16,7 +16,7 @@
 	 <ul>
 	 	<li><a class="logo" href='pagina-homeAdmin.php'><img src="img/avatar.png"></a></li>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir</a></li>
- 		 <!-- <li><a href="">Perfil</a></li> -->
+		<li><a href="pagina-perfil.php"> Perfil </a></li>
 	</ul> 
 	<div class="content">
 		<div class="bloque">

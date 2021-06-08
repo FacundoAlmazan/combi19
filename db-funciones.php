@@ -446,10 +446,10 @@
 						<option value=<?php echo'"'; echo $datos['idRuta']; echo '">';
 						echo $datos['idRuta']; ?> </option>
 						<?php
-						$consulta = "SELECT idRuta FROM viajes";
+						$consulta = "SELECT id FROM rutas";
 						$rutas = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($rutas)) {
-		            		echo '<option value="'.$valores[idRuta].'">'.$valores[idRuta].'</option>';
+		            		echo '<option value="'.$valores[id].'">'.$valores[id].'</option>';
 		          		}
 						?>
 					</select>
@@ -661,7 +661,7 @@
 			$consulta="UPDATE usuarios SET nombre='$nombre',apellido='$apellido',nombreusuario='$user',email='$email',dni='$dni',clave='$pass',nacimiento='$nacimiento',tipo='$tipo',gold='$gold' where (id='$id')";
 	    	$resultado=consultar($consulta);
 			if($resultado){
-				echo '<script language="javascript">alert("Se ha registrado exitosamente");</script>';
+				echo '<script language="javascript">alert("Se han actualizado los datos del perfil");</script>';
 				include "pagina-perfil.php";
 				//include "index.php";
 				return true;
@@ -802,7 +802,7 @@
 
 	function agregarViaje(){
 		?>
-		<form method="POST" onsubmit="return checkRuta()" action="db-agregarViaje.php">
+		<form method="POST" onsubmit="return checkViaje()" action="db-agregarViaje.php">
 			<h3> Ruta </h3>
 			<select id="ruta" type="text" class="campoTexto" name="ruta">
 				<option value="x">SELECCIONE UNA RUTA</option>
@@ -830,8 +830,7 @@
 					  echo $valores['id'];
 					  echo'">';
 					  echo $valores['nombre'];
-					  echo '</input>
-';
+					  echo '</input>';
           		}
 				  echo'<br>';
 				?>
@@ -840,7 +839,7 @@
 			<input type="submit" value="AGREGAR" class="modificar">
 		</form>
 	</div>
-	<script type="text/javascript" src="scripts/script-agregarRuta.js"></script>
+	<script type="text/javascript" src="scripts/script-agregarViaje.js"></script>
 	<?php
 	}
 	function agregarInsumo(){

@@ -17,8 +17,8 @@
 	 <ul>
 	 	<li><a class="logo" href='pagina-homeUsuario.php'><img src="img/avatar.png"></a></li>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
-	    <li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
+		<li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>
 	</ul> 
 	<div class="content">
 		<div class="bloque">

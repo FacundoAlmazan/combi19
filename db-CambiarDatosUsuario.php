@@ -11,6 +11,7 @@
   $dni = $_POST['dni'];
   $nacimiento=$_POST['nacimiento'];
   $userActual= $_SESSION['nombreusuario'];
+  $nombreValidacion="";
   if( $user !=  $userActual){
     $consulta= "SELECT * from usuarios where nombreusuario='$user'";
     $respuesta= consultar($consulta);
@@ -18,9 +19,9 @@
       foreach ($respuesta as $respuesta) {
         $nombreValidacion= $respuesta['nombreusuario'];
       } 
-     }
+    }
     if($user == $nombreValidacion){
-      include("pagina-registro.php");
+      include("pagina-perfil.php");
         ?>
       <script> alert("El usuario ya existe");
       document.getElementById("user").focus();
