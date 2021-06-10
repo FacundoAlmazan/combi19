@@ -6,7 +6,12 @@
   $apellido = $_POST['apellido'];
   $email = $_POST['email'];
   $dni = $_POST['dni'];
+  $numTarjeta = $_POST['numTarjeta'];
+  $claveTarjeta = $_POST['claveTarjeta'];
+  $nombreTarjeta = $_POST['nombreTarjeta'];
+  $gold = 0;
   $nombreValidacion="ASDASKDALhasjdhasjkdasjd";
+  $emailValidacion="ASDASKDALhasjdhasjkdasjd";
   $nacimiento=$_POST['nacimiento'];
   $consulta= "SELECT * from usuarios where nombreusuario='$user'";
   $respuesta= consultar($consulta);
@@ -30,6 +35,32 @@
     <?php
   }
   else{
-  EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
+    $consulta= "SELECT email FROM usuarios where email='$email'";
+    $respuesta= consultar($consulta);
+    if($respuesta){
+      foreach ($respuesta as $respuesta) {
+         $emailValidacion= $respuesta['email'];
+      }
+    }
+    if($email == $emailValidacion){
+      include("pagina-registro.php");
+      ?>
+      <script> alert("El mail ya se encuentra en uso");
+      document.getElementById("email").focus();
+      document.getElementById("nombre").value= <?php echo json_encode($nombre); ?>;
+      document.getElementById("apellido").value= <?php echo json_encode($apellido); ?>;
+      document.getElementById("user").value= <?php echo json_encode($user); ?>;
+      document.getElementById("dni").value= <?php echo json_encode($dni); ?>;
+      document.getElementById("nacimiento").value= <?php echo json_encode($nacimiento); ?>;
+      document.getElementById("pw").value= <?php echo json_encode($pass); ?>;
+      </script>
+      <?php
+    }
+    else{
+      if(!empty($numTarjeta) && !empty($claveTarjeta) && !empty($nombreTarjeta)){
+        $gold=1;
+      }
+      EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento,$gold);
+    }
   }
 ?>

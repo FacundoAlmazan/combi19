@@ -71,9 +71,3 @@
 			alert("El origen y el destino no pueden ser el mismo");
 		}
 	}
-
-	window.onload = function(){
-		if (window.location.hash == "#modificado"){
-			alert("La ruta se ha modificado con exito");
-		}
-	}

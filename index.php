@@ -21,7 +21,8 @@
         <input type="submit" value="Ingresar">
         </a>
       </form>
-      <a href="pagina-registro.php"> Aun no tiene un usuario? Registrese!</a>
+      <br>
+      <a href="pagina-registro.php"> Aún no tiene un usuario? Registrese!</a>
     </div>
     <script src="scripts/script-login.js"></script> 
   </body>

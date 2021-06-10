@@ -6,14 +6,15 @@ $consulta="SELECT * from lugares where lugar='$lugar' and provincia='$provincia'
 $resultado= consultar($consulta);
 if($resultado){
 	foreach ($resultado as $resultado){
-		$dato=$resultado['lugar'];
+		$datoLugar=$resultado['lugar'];
+		$datoProvincia=$resultado['provincia'];
 	}
 }
-if (isset($dato)){
+if (isset($datoLugar) && isset($datoProvincia)){
 	header("location: pagina-agregar.php?tipo=3#error");
 }
 else{
-insertarLugar($lugar, $provincia); 
-header("location: pagina-agregar.php?tipo=3#agregado");
+	insertarLugar($lugar, $provincia); 
+	header("location: pagina-agregar.php?tipo=3#agregado");
 }
 ?>

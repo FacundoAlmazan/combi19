@@ -10,12 +10,9 @@
 	}
 
 	function validarModelo(){
-		if(modelo.value ==""){
+		if(modelo.value==""){
 			alert("El modelo no puede estar vacío");
-			return false;
-		}
-		if(!validarAlfanumericos(modelo.value)){
-			alert("El modelo solo puede contener caracteres alfanumericos");
+			estado=false;
 			return false;
 		}
 		return true;
@@ -26,7 +23,7 @@
 			alert("El patente no puede estar vacío");
 			return false;
 		}
-		if(!validarAlfanumericos(patente.value)){
+		if(!validarLetrasNumerosEspacios(patente.value)){
 			alert("El patente solo puede contener caracteres alfanumericos");
 			return false;
 		}
@@ -50,7 +47,7 @@
 			alert("El id no puede estar vacío");
 			return false;
 		}
-		if(!validarAlfanumericos(id.value)){
+		if(!validarLetrasNumerosEspacios(id.value)){
 			alert("El id solo puede contener caracteres alfanumericos");
 			return false;
 		}
@@ -73,14 +70,14 @@
 		return true;
 	}
 
-	function validarAlfanumericos(String){
-	    var patron= /^[a-zA-Z0-9]*$/;
-	    if (patron.test(String)){
-	        return true;
-	    }
-	    else{
-	        return false;
-	    }
+	function validarLetrasNumerosEspacios(String){
+		var patron= /^[a-zA-Z0-9\s]*$/;
+		if (patron.test(String)){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	function validarNumericos(Num){
@@ -96,11 +93,5 @@
 	window.onload = function(){
 		if (window.location.hash == "#agregado"){
 			alert("La combi se ha agregado con exito");
-		}
-	}
-
-	window.onload = function(){
-		if (window.location.hash == "#modificado"){
-			alert("La combi se ha modificado con exito");
 		}
 	}

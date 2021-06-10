@@ -76,9 +76,3 @@ window.onload = function(){
         alert("");
     }
 }
-
-window.onload = function(){
-    if (window.location.hash == "#modificado"){
-        alert("El viaje se ha modificado con exito");
-    }
-}

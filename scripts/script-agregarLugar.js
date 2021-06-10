@@ -30,20 +30,20 @@
 	}
 
 	function validarAlfanumericos(String){
-	    var patron= /^[a-zA-Z0-9]*$/;
-	    if (patron.test(String)){
-	        return true;
-	    }
-	    else{
-	        return false;
-	    }
+		var patron= /^[a-zA-Z0-9\s]*$/;
+		if (patron.test(String)){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	window.onload = function(){
 		if (window.location.hash == "#agregado"){
 			alert("El lugar se ha agregado con exito");
 		}
-		if(window.location.hash == "#error"){
-			alert("Error: Nombre de lugar y provincia ya existentes")
+		if (window.location.hash == "#error"){
+			alert("Nombre de lugar y provincia ya existentes");
 		}
 	}

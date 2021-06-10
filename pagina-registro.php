@@ -20,14 +20,64 @@
         <!-- ENTRADA DE CONTRASEÑA -->
         <input id="pw" type="password" class="campoTexto" name="password" placeholder="Ingrese contraseña">
 
+    
+        <style>
+          .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 4px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            height:28px;
+          }
+
+          .active, .collapsible:hover {
+            background-color: #555;
+          }
+
+          .content {
+            margin:20px;
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+          }
+        </style>
+        <p>¿Sabías que con nuestra membresia GOLD accedes a 10% de descuento en todos nuestros servicios?</p>
+        <button type="button" class="collapsible">Comprar membresia GOLD</button>
+        <div class="content">
+          <H4>Obtén tu suscripción mensual GOLD de Combi19 a solo $300ARS. </H4>
+          <input id="numTarjeta" type="text" class="campoTexto" name="numTarjeta" placeholder="Ingrese su número de tarjeta">
+          <input id="claveTarjeta" type="password" class="campoTexto" name="claveTarjeta" placeholder="Ingrese la clave de su tarjeta">
+          <input id="nombreTarjeta" type="text" class="campoTexto" name="nombreTarjeta" placeholder="Ingrese su nombre y apellido">
+        </div>
+
+        <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+        <br>
+        <br>
+        <br>
         <!-- SUBMIT -->
-        <a href="index_inicio.php"> 
         <input type="submit" value="Ingresar">
-        </a>
       </form>
-      <p>¿Sabías que con nuestra membresia GOLD accedes a 10% de descuento en todos nuestros servicios?</p>
-      <div class="gold-div">
-      <button class="gold-button"> Comprar membresia GOLD </button>
+      <br>
+      <a href="index.php"> Volver a inicio de sesión </a>
       </div>
     </div>
     <script src="scripts/script-registro.js"></script> 

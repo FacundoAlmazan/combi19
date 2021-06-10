@@ -9,11 +9,11 @@
 	// Funciones login
 
 	// Funciones Registro
-	function EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento){
+	function EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento,$gold){
 		$validacion="SELECT * from usuarios where nombreusuario=$user";
 		$resultadoValidacion=consultar($validacion);
     	if ($resultadoValidacion== null){
-			$consulta="INSERT into usuarios(nombre,apellido,nombreusuario,email,dni,clave,nacimiento,tipo,gold) VALUES ('$nombre','$apellido','$user','$email','$dni','$pass','$nacimiento','1','1')";
+			$consulta="INSERT into usuarios(nombre,apellido,nombreusuario,email,dni,clave,nacimiento,tipo,gold) VALUES ('$nombre','$apellido','$user','$email','$dni','$pass','$nacimiento','1','$gold')";
 	    	$resultado=consultar($consulta);
 			if($resultado){
 				echo '<script language="javascript">alert("Se ha registrado exitosamente");</script>';
@@ -71,7 +71,9 @@
 				echo '">'; 
 				echo' <div class="column">
 					<p>NOMBRE:';
-					echo $respuesta['nombrecompleto'];
+					echo $respuesta['nombre'];
+					echo " APELLIDO:";
+					echo $respuesta['apellido'];
 					echo " EMAIL:";
 					echo $respuesta['email'];
 					echo" TELEFONO:";
@@ -307,10 +309,11 @@
 						<option value=<?php echo'"'; echo$datos['chofer']; echo '">';
 						echo $datos['chofer']; ?> </option>
 						<?php
-						$consulta = "SELECT nombrecompleto FROM choferes";
+						$consulta = "SELECT usuario FROM choferes";
 						$choferes = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($choferes)) {
-		            		echo '<option value="'.$valores[nombrecompleto].'">'.$valores[nombrecompleto].'</option>';
+							if($valores[usuario] != $datos['chofer']){
+		            		echo '<option value="'.$valores[usuario].'">'.$valores[usuario].'</option>';}
 		          		}
 						?>
 					</select>
@@ -371,7 +374,7 @@
 		$datos = $respuesta;
 		if($respuesta){
 			foreach ($datos as $datos){
-				echo '<form method="POST" onsubmit="return checkLugar()" action="db-modificarRuta.php?id=';
+				echo '<form method="POST" onsubmit="return checkRuta()" action="db-modificarRuta.php?id=';
 				echo $id; echo'">';?>
 					<h3> Origen </h3>
 					<select id=origen type="text" class="campoTexto" name="origen">
@@ -381,7 +384,8 @@
 						$consulta = "SELECT lugar FROM lugares";
 						$lugares = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($lugares)) {
-		            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';
+							if($valores[lugar] != $datos[origen]){
+		            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';}
 		          		}
 						?>
 					</select>
@@ -393,7 +397,8 @@
 						$consulta = "SELECT lugar FROM lugares";
 						$lugares = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($lugares)) {
-		            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';
+							if($valores[lugar] != $datos[destino]){
+		            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';}
 		          		}
 						?>
 					</select>
@@ -405,7 +410,8 @@
 						$consulta = "SELECT identificacion FROM combis";
 						$combis = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($combis)) {
-		            		echo '<option value="'.$valores[identificacion].'">'.$valores[identificacion].'</option>';
+							if($valores[identificacion] != $datos[combi]){
+		            		echo '<option value="'.$valores[identificacion].'">'.$valores[identificacion].'</option>';}
 		          		}
 						?>
 					</select>
@@ -441,7 +447,7 @@
 			foreach ($datos as $datos){
 				echo '<form method="POST" onsubmit="return checkViaje()" action="db-modificarViaje.php?id=';
 				echo $id; echo'">';?>
-					<h3> Ruta </h3>
+					<h3> ID ruta </h3>
 					<select id=ruta type="text" class="campoTexto" name="ruta">
 						<option value=<?php echo'"'; echo $datos['idRuta']; echo '">';
 						echo $datos['idRuta']; ?> </option>
@@ -449,7 +455,8 @@
 						$consulta = "SELECT id FROM rutas";
 						$rutas = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($rutas)) {
-		            		echo '<option value="'.$valores[id].'">'.$valores[id].'</option>';
+							if($valores[id] != $datos[idRuta]){
+		            		echo '<option value="'.$valores[id].'">'.$valores[id].'</option>';}
 		          		}
 						?>
 					</select>
@@ -503,8 +510,12 @@
 					<select id="tipo" type="text" class="campoTexto" name="tipo">
 						<option value=<?php echo'"'; echo $datos['tipo']; echo '">';
 								echo $datos['tipo']; ?> </option>
-						<option value="SALADO">Salado</option>
-						<option value="DULCE">Dulce</option>
+						<?php
+						if($datos['tipo']=="SALADO"){
+							echo'<option value="DULCE">DULCE</option>';}
+						else{
+							echo'<option value="SALADO">SALADO</option>';}
+						?>
 					</select>
 					<br>
 					<input type="submit" value="GUARDAR" class="modificar" onclick="return confirm('¿Seguro que quieres modificar?')">
@@ -549,7 +560,7 @@
 		$consulta= "INSERT INTO usuarios(nombre, apellido, nombreusuario, email, dni, clave, nacimiento, tipo, gold) VALUES('$nombre','$apellido','$usuario','$mail','$dni','$clave','$nacimiento','2','0')";
 		consultar($consulta);
 		$nombrecompleto=$apellido.', '.$nombre;
-		$consulta= "INSERT INTO choferes(nombrecompleto, nombre, apellido, email, telefono) VALUES('$nombrecompleto','$nombre','$apellido','$mail','$telefono')";
+		$consulta= "INSERT INTO choferes(nombre, apellido,usuario, email, telefono) VALUES('$nombre','$apellido','$usuario','$mail','$telefono')";
 		consultar($consulta);
 	}
 
@@ -595,10 +606,9 @@
 		foreach ($datosviejos as $datosviejos){
 			$emailviejo= $datosviejos['email'];
 		}
-		$nombrecompleto=$apellido.', '.$nombre;
-		$consulta= "UPDATE choferes SET nombrecompleto='$nombrecompleto', apellido='$apellido', nombre='$nombre', email='$mail', telefono='$telefono' WHERE (id='$id')";
+		$consulta= "UPDATE choferes SET nombre='$nombre', apellido='$apellido', email='$mail', telefono='$telefono' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
-		$consultaUsuario= "UPDATE usuarios SET email='$mail' , nombre='$nombre', apellido='$apellido' , email='$mail' where email='$emailviejo'";
+		$consultaUsuario= "UPDATE usuarios SET nombre='$nombre', apellido='$apellido' , email='$mail' where email='$emailviejo'";
 		$respuestaUsuario=consultar($consultaUsuario);
 			return true;
 	}
@@ -719,15 +729,15 @@
 			<select id="chofer" type="text" class="campoTexto" name="chofer">
 				<option value="x">SELECCIONE UN CHOFER</option>
 				<?php
-				$consulta = "SELECT nombrecompleto FROM choferes";
+				$consulta = "SELECT usuario FROM choferes";
 				$choferes = consultar($consulta);
           		while ($valores = mysqli_fetch_array($choferes)) {
-            		echo '<option value="'.$valores[nombrecompleto].'">'.$valores[nombrecompleto].'</option>';
+            		echo '<option value="'.$valores[usuario].'">'.$valores[usuario].'</option>';
           		}
 				?>
 			</select>
 			<h3>Tipo:</h3>
-			<input id=tipo type="text" class="campoTexto" name="tipo">
+			<input id="tipo" type="text" class="campoTexto" name="tipo">
 			<br>
 			<br>
 			<input type="submit" value="AGREGAR" class="modificar">
@@ -741,9 +751,9 @@
 		?>
 		<form method="POST" onsubmit="return checkLugar()" action="db-agregarLugar.php">
 			<h3>Lugar:</h3>
-			<input id=lugar type="text" class="campoTexto" name="lugar">
+			<input id="lugar" type="text" class="campoTexto" name="lugar">
 			<h3>Provincia:</h3>
-			<input id=provincia type="text" class="campoTexto" name="provincia">
+			<input id="provincia" type="text" class="campoTexto" name="provincia">
 			<br>
 			<input type="submit" value="AGREGAR" class="modificar">
 		</form>
@@ -803,15 +813,15 @@
 	function agregarViaje(){
 		?>
 		<form method="POST" onsubmit="return checkViaje()" action="db-agregarViaje.php">
-			<h3> Ruta </h3>
+			<h3> ID ruta </h3>
 			<select id="ruta" type="text" class="campoTexto" name="ruta">
-				<option value="x">SELECCIONE UNA RUTA</option>
+				<option value="x">SELECCIONE UN ID DE RUTA</option>
 				<?php
-				$consulta = "SELECT * FROM rutas";
-				$rutas = consultar($consulta);
-          		while ($valores = mysqli_fetch_array($rutas)) {
-            		echo '<option value="'.$valores[id].'">'.$valores[origen].' ---> '.$valores[destino].'</option>';
-          		}
+					$consulta = "SELECT id FROM rutas";
+					$rutas = consultar($consulta);
+					while ($valores = mysqli_fetch_array($rutas)) {
+						echo '<option value="'.$valores[id].'">'.$valores[id].'</option>';
+					}
 				?>
 			</select>
 			<h3>Precio:</h3>
@@ -846,9 +856,9 @@
 		?>
 		<form method="POST" onsubmit="return checkInsumo()" action="db-agregarInsumo.php">
 			<h3>Nombre:</h3>
-			<input id=nombre type="text" class="campoTexto" name="nombre">
+			<input id="nombre" type="text" class="campoTexto" name="nombre">
 			<h3>Precio:</h3>
-			<input id=precio type="number" class="campoTexto" name="precio">
+			<input id="precio" type="number" class="campoTexto" name="precio">
 			<h3>Tipo:</h3>
 			<select id="tipo" type="text" class="campoTexto" name="tipo">
 				<option value="SALADO">Salado</option>

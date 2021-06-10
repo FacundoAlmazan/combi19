@@ -5,6 +5,8 @@ var apellido=document.getElementById("apellido");
 var nombre=document.getElementById("nombre");
 var dni=document.getElementById("dni");
 var email= document.getElementById("email");
+var nombreTarjeta= document.getElementById("nombreTarjeta");
+var numeroTarjeta= document.getElementById("numTarjeta");
 var estado= true;
 
 function validarNombre(){
@@ -104,6 +106,42 @@ function validarEdad(){
 	return true;
 }
 
+function validarNumeroTarjeta(){
+	if(!validarNumerosYEspacios(numeroTarjeta.value)){
+		alert("el nombre en la tarjeta solo puede contener mayúsculas y espacios");
+		return false;
+	}
+	return true;	
+}
+
+function validarNombreTarjeta(){
+	if(!validarMayusculasYEspacios(nombreTarjeta.value)){
+		alert("el nombre en la tarjeta solo puede contener mayúsculas y espacios");
+		return false;
+	}
+	return true;	
+}
+
+function validarMayusculasYEspacios(String){
+    var patron= /^[A-Z\s]*$/;
+    if (patron.test(String)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function validarNumerosYEspacios(String){
+    var patron= /^[A-Z\s]*$/;
+    if (patron.test(String)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function validarLetrasYEspacios(String){
     var patron= /^[a-zA-Z\s]*$/;
     if (patron.test(String)){
@@ -134,6 +172,6 @@ function validarTamaño(String){
 }
 
 function checkRegister(){
-	return validarNombre() &&  validarApellido() &&  validarEmail() &&  validarDni() &&  validarEdad() && validarUsuario() && validarContraseña();
+	return validarNombre() &&  validarApellido() &&  validarEmail() &&  validarDni() &&  validarEdad() && validarUsuario() && validarContraseña() && validarNombreTarjeta();
 }
 

@@ -45,21 +45,23 @@ $id=$_GET['id'];
         $verificacion="SELECT * from choferes where (id='$id')";
         $resultado = consultar($verificacion);
         foreach ($resultado as $resultado){
-           $nombre = $resultado['nombrecompleto'];
+           $usuario = $resultado['usuario'];
         }
-        $verificacion2 = "SELECT * from combis where (chofer='$nombre')";
+        $verificacion2 = "SELECT * from combis where (chofer='$usuario')";
         $resultado2= consultar($verificacion2);
         if(isset($resultado2)){
             foreach ($resultado2 as $resultado2){
-                $nombre2 = $resultado2['chofer'];
+                $usuario2 = $resultado2['chofer'];
              }
             }
-        if(isset($nombre2)){
+        if(isset($usuario2)){
             echo'<script> alert ("Este chofer esta a cargo de una combi, no se puede eliminar");</script>';
             include "pagina-homeAdmin.php";
             return false;
         }
         else{
+            $consulta0="DELETE from usuarios where (nombreusuario='$usuario')";
+            consultar($consulta0);
             $consulta="DELETE from choferes where (id='$id')";
         }
     }
@@ -67,7 +69,10 @@ $id=$_GET['id'];
         $consulta="DELETE from rutas where (id='$id')";
     }
     elseif ($tipo=='5'){
-        
+        $consulta="DELETE from viajes where (id='$id')";
+    }
+    elseif ($tipo=='6'){
+        $consulta="DELETE from insumos where (id='$id')";
     }
 $resultado= consultar($consulta);
 include "pagina-homeAdmin.php";

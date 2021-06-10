@@ -50,5 +50,6 @@
 		</div>
      <?php listarDatos($tipo); ?>
 	</div>
+	<script src="scripts/script-listar.js"></script> 
 </body>
 </html>
