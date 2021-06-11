@@ -16,6 +16,16 @@
 	if (!isset($str)){
 		$str="NULL";
 	}
-	insertarViaje($precio, $fecha, $hora, $ruta,$str); 
+	$consulta= "SELECT * from rutas where id='$ruta'";
+	$resultado= consultar($consulta);
+	foreach ($resultado as $resultado){
+		$combiId= $resultado['combi'];
+	}
+	$consulta2="SELECT * from combis where identificacion='$combiId'";
+	$resultado2=consultar($consulta2);
+	foreach ($resultado2 as $resultado2){
+		$cantAsientos= $resultado2['cantasientos'];
+	}
+	insertarViaje($precio, $fecha, $hora, $ruta,$str,$cantAsientos); 
 	header("location: pagina-agregar.php?tipo=5#agregado");
 ?>

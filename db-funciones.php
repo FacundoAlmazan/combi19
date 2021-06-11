@@ -179,6 +179,57 @@
 					}
 					$strInsumos=rtrim($str,"+");
 					echo $strInsumos;
+					echo " ASIENTOS:";
+					echo $respuesta['asientos'];echo "/"; echo $respuesta['asientosDisp'];
+				echo "</p></div></a>";
+		   	}
+		}
+		if(mysqli_num_rows ($rest) === 0){
+			echo '<h2 style="color:white">No hay viajes en el catálogo</h2>';
+		}
+	}
+	function listarViajesUsuario(){
+		$consulta= "SELECT * from viajes";
+		$respuesta=consultar($consulta);
+		$rest= $respuesta;
+		if($respuesta){
+			foreach ($respuesta as $respuesta){
+			   	echo '<a class="item"';
+				echo' href="pagina-comprarViaje.php?idViaje=';
+			   	echo $respuesta['id'];
+			   	echo '">'; 
+				echo' <div class="column">
+					<p>RUTA : ';
+					$idR=$respuesta['idRuta'];
+					$consulta1= "SELECT * from rutas where id='$idR'";
+					$ans=consultar($consulta1);
+					foreach($ans as $ans){
+						echo $ans['origen']. " ---> " . $ans['destino'];
+					}
+					echo " PRECIO:";
+					if(!isset($_SESSION)){
+						session_start();
+					 }
+					 if($_SESSION['gold']==1){
+						 echo '<strike>';
+						 echo $respuesta['precio'];
+						 echo '</strike>';
+						 echo '->';
+						 $precio=$respuesta['precio'];
+						 $descuento= $precio*0.1;
+						 $precio= $precio-$descuento;
+						 echo $precio;
+					 }
+					 else{
+					 echo'<p>';
+					 echo $respuesta['precio'];
+					 echo '</p>';}
+					echo " FECHA:";
+					echo $respuesta['fecha'];
+					echo" HORA:";
+					echo $respuesta['hora'];
+					echo " ASIENTOS DISPONIBLES:";
+                     echo $respuesta['asientosDisp'];
 				echo "</p></div></a>";
 		   	}
 		}
@@ -569,15 +620,15 @@
 		$consulta= "INSERT INTO combis(identificacion,modelo, patente, cantasientos, chofer, tipo) VALUES('$id','$modelo','$patente','$asientos','$chofer','$tipo')";
 		consultar($consulta);
 	}
-	function insertarViaje($precio,$fecha,$hora,$ruta,$ins){
+	function insertarViaje($precio,$fecha,$hora,$ruta,$ins,$cant){
 		session_start();
-		$consulta= "INSERT INTO viajes(precio,fecha,hora,idRuta,estado,insumos) VALUES('$precio','$fecha','$hora','$ruta',1,'$ins')";
+		$consulta= "INSERT INTO viajes(precio,fecha,hora,idRuta,estado,insumos,asientos,asientosDisp) VALUES('$precio','$fecha','$hora','$ruta',1,'$ins','$cant','$cant')";
 		consultar($consulta);
 	}
-	function insertarComentario($slct, $mensaje){
+	function insertarComentario($mensaje){
        session_start();
 	   $id= $_SESSION['id'];
-	   $consulta= "INSERT INTO comentarios(puntuacion,comentario,idUser) VALUES ('$slct','$mensaje','$id')";
+	   $consulta= "INSERT INTO comentarios(comentario,idUser) VALUES ('$mensaje','$id')";
 	   consultar($consulta);
 	}
 	function insertarLugar($lugar,$provincia){
@@ -590,7 +641,18 @@
 		$consulta= "INSERT INTO insumos(nombre,precio,tipo) VALUES('$nombre','$precio','$tipo')";
 		consultar($consulta);
 	}
-
+    function insertarPasaje($MiId, $idViaje, $str){
+		$consulta= "SELECT * from viajes where id='$idViaje'";
+		$resultado= consultar($consulta);
+		foreach ($resultado as $resultado){
+			$pasajes= $resultado['asientosDisp'];
+		}
+		$pasajes= $pasajes-1;
+		$consulta ="UPDATE viajes SET asientosDisp= '$pasajes'  WHERE (id='$idViaje')";
+		$resultado= consultar($consulta);
+		$consulta1="INSERT INTO pasajes(idViaje,idUsuario,insumos) VALUES ('$idViaje','$MiId','$str')";
+		$resultado1= consultar($consulta1);
+	}
 	function insertarRuta($origen,$destino,$combi,$km,$duracion){
 		session_start();
 		$consulta= "INSERT INTO rutas(origen, destino, combi, km, duracion) VALUES('$origen','$destino','$combi','$km','$duracion')";
@@ -893,5 +955,89 @@
                 break;
 		}
 	}
+	function verViaje($id){
+		$consulta= "SELECT * from viajes where (id='$id')";
+		$respuesta = consultar($consulta);
+		$datos = $respuesta;
+		if($respuesta){
+			foreach ($datos as $datos){
+				echo '<h3>Ruta:</h3>
+					 <div class="column">
+					<p>Origen : ';
+					$idR=$datos['idRuta'];
+					$consulta1= "SELECT * from rutas where id='$idR'";
+					$ans=consultar($consulta1);
+					foreach($ans as $ans){
+						echo $ans['origen']. "      Destino:" . $ans['destino'];
+					}
+					echo '<h3>Precio:</h3>';
+					if(!isset($_SESSION)){
+                       session_start();
+					}
+					if($_SESSION['gold']==1){
+						echo '<strike>';
+						echo $datos['precio'];
+						echo '</strike>';
+						echo '->';
+						$precio=$datos['precio'];
+						$descuento= $precio*0.1;
+						$precio= $precio-$descuento;
+						echo $precio;
+					}
+					else{
+				    echo'<p>';
+					echo $datos['precio'];
+					echo '</p>';}
+					echo '<h3>Fecha:</h3>
+					<p>';
+					echo $datos['fecha'];
+					echo '</p>';
+					echo '<h3>Hora:</h3>
+					<p>';
+					echo $datos['hora'];
+					echo '</p>';
+					echo "<h3> Insumos Disponibles:</h3>";
+					$str=" ";
+					$insumos=explode(",",$datos['insumos']);
+					if(!isset($_SESSION)){
+						session_start();
+					 }
+					 if($_SESSION['gold']==1){
+					foreach ($insumos as $insumos){
+						$insumoInt= (int)$insumos;
+						$consultaIns= "SELECT * from insumos where id='$insumoInt'";
+						$resultadoIns= consultar($consultaIns);
+						foreach($resultadoIns as $resultadoIns){
+							$precioIns=$resultadoIns['precio'];
+							$descuentoIns = $precioIns * 0.1;
+							$precioIns= $precioIns - $descuentoIns;
+							$str= $str . " " . $resultadoIns['nombre']."(".$precioIns."$)/";
 
+
+						}
+					}
+				}
+				else{
+					foreach ($insumos as $insumos){
+						$insumoInt= (int)$insumos;
+						$consultaIns= "SELECT * from insumos where id='$insumoInt'";
+						$resultadoIns= consultar($consultaIns);
+						foreach($resultadoIns as $resultadoIns){
+							$str= $str . " " . $resultadoIns['nombre']."(".$resultadoIns['precio']."$)/";
+
+						}
+					}
+				}
+					$strInsumos=rtrim($str,"/");
+					echo $strInsumos;
+					?>
+					<br>
+				<?php
+			}
+		}
+				?>
+			</div>
+		<script type="text/javascript" src="scripts/script-agregarViaje.js"></script>
+		<?php
+	}
 ?>
