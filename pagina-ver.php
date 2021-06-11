@@ -43,6 +43,5 @@
 
 	<div class="content">
 		<?php echo verDetalle($id,$tipo); ?>				
-	<script type="text/javascript" src="scripts/script-agregarChofer.js"></script>
 </body>
 </html>

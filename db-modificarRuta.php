@@ -6,9 +6,6 @@
 	$combi = $_POST["combi"];
 	$km = $_POST["km"];
 	$duracion = $_POST["duracion"];
-	if(updatearRuta($id, $origen, $destino, $combi, $km, $duracion)){
-	   header("location: pagina-listar.php?tipo=4#modificado");}
-	   else{
-		header("location: $id"); 
-	   }
+	updatearRuta($id, $origen, $destino, $combi, $km, $duracion);
+	header("location: pagina-listar.php?tipo=4#modificado");
 ?>

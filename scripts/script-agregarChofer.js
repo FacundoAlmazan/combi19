@@ -135,4 +135,10 @@
 		if (window.location.hash == "#agregado"){
 			alert("El chofer se ha agregado con exito");
 		}
+		if (window.location.hash == "#errorUsuario"){
+			alert("El nombre de usuario ya existe");
+		}
+		if (window.location.hash == "#errorMail"){
+			alert("El email ya se encuentra en uso");
+		}
 	}

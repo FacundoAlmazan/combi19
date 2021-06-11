@@ -5,9 +5,6 @@
 	$precio = $_POST["precio"];
 	$fecha = $_POST["fecha"];
 	$hora = $_POST["hora"];
-	if(updatearViaje($id, $ruta, $precio, $fecha, $hora)){
-	   header("location: pagina-listar.php?tipo=5#modificado");}
-	   else{
-		header("location: $id"); 
-	   }
+	updatearViaje($id, $ruta, $precio, $fecha, $hora);
+	header("location: pagina-listar.php?tipo=5#modificado");
 ?>

@@ -3,11 +3,24 @@
 	$id=$_GET['id'];
 	$nombre = $_POST["nombre"];
 	$apellido = $_POST["apellido"];
-	$mail = $_POST["email"];
+	$email = $_POST["email"];
 	$telefono = $_POST["telefono"];
-	if(updatearChofer($id, $nombre, $apellido, $mail, $telefono)){
-	   header("location: pagina-listar.php?tipo=1#modificado");}
-	   else{
-		header("location: $id"); 
-	   }
+	$emailValidacion="ASDASKDALhasjdhasjkdasjd";
+
+	$consulta= "SELECT email FROM usuarios where email='$email'";
+	$respuesta= consultar($consulta);
+	if($respuesta){
+		foreach ($respuesta as $respuesta) {
+			$emailValidacion= $respuesta['email'];
+		}
+	}
+	if($email == $emailValidacion){
+		header("location: pagina-ver.php?tipo=1&id=$id#errorMail");
+	}
+	else{
+		updatearChofer($id, $nombre, $apellido, $email, $telefono);
+		header("location: pagina-listar.php?tipo=1#modificado");
+	}
+
+
 ?>

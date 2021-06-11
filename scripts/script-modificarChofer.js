@@ -44,15 +44,15 @@
 			alert("El telefono no puede estar vacío");
 			return false;
 		}
-		if(!validarAlfanumericos(telefono.value)){
-			alert("El telefono solo puede contener caracteres alfanumericos");
+		if(!validarNumerosYGuiones(telefono.value)){
+			alert("El telefono solo puede contener números y guiones");
 			return false;
 		}
 		return true;
 	}
 
 	function validarAlfanumericos(String){
-	    var patron= /^[a-zA-Z0-9]*$/;
+	    var patron= /^[a-zA-Z0-9,\s]*$/;
 	    if (patron.test(String)){
 	        return true;
 	    }
@@ -72,13 +72,10 @@
 	}
 
 	window.onload = function(){
-		if (window.location.hash == "#agregado"){
-			alert("El chofer se ha agregado con exito");
-		}
-	}
-
-	window.onload = function(){
 		if (window.location.hash == "#modificado"){
 			alert("El chofer se ha modificado con exito");
+		}
+		if (window.location.hash == "#errorMail"){
+			alert("El email ya se encuentra en uso");
 		}
 	}

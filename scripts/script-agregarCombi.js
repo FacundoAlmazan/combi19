@@ -94,4 +94,7 @@
 		if (window.location.hash == "#agregado"){
 			alert("La combi se ha agregado con exito");
 		}
+		if (window.location.hash == "#errorId"){
+			alert("La identificación se encuentra en uso");
+		}
 	}

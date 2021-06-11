@@ -55,15 +55,15 @@ function validarEmail(){
 
 function validarUsuario(){
 	if(usuario.value == ""){
-		alert("ingrese su nombre de usuario");
+		alert("Ingrese su nombre de usuario");
 		return false;
 	}
 	if(!validarAlfanumericos(usuario.value)){
-		alert("el usuario solo puede tener caracteres alfanumericos");
+		alert("El usuario solo puede tener caracteres alfanumericos");
 		return false;
 	}
 	if(!validarTamaño(usuario.value)){
-		alert("el usuario debe tener un minimo de 6 caracteres");
+		alert("El usuario debe tener un minimo de 6 caracteres");
 		return false;
 	}
 	return true;
@@ -71,11 +71,11 @@ function validarUsuario(){
 
 function validarContraseña(){
 	if(contraseña.value == "" ){
-		alert("ingrese su contraseña");
+		alert("Ingrese su contraseña");
 		return false;
 	}
 	if(!validarTamaño(contraseña.value)){
-		alert("el contraseña debe tener un minimo de 6 caracteres");
+		alert("El contraseña debe tener un minimo de 6 caracteres");
 		return false;
 	}
 	return true;
@@ -84,7 +84,7 @@ function validarContraseña(){
 
 function validarEdad(){
 	if(nacimiento.value==""){
-		alert("ingrese su fecha de nacimiento");
+		alert("Ingrese su fecha de nacimiento");
 		return false;
 	}
 	year = nacimiento.value.substr(0,4);
@@ -100,7 +100,7 @@ function validarEdad(){
 		age--;
 	}
 	if(age < 18){
-		alert("debes ser mayor de 18 años registrarte en el sitio");
+		alert("Debes ser mayor de 18 años para registrarte en el sitio");
 		return false;
 	}
 	return true;
@@ -108,7 +108,7 @@ function validarEdad(){
 
 function validarNumeroTarjeta(){
 	if(!validarNumerosYEspacios(numeroTarjeta.value)){
-		alert("el nombre en la tarjeta solo puede contener mayúsculas y espacios");
+		alert("El nombre en la tarjeta solo puede contener mayúsculas y espacios");
 		return false;
 	}
 	return true;	
@@ -116,7 +116,7 @@ function validarNumeroTarjeta(){
 
 function validarNombreTarjeta(){
 	if(!validarMayusculasYEspacios(nombreTarjeta.value)){
-		alert("el nombre en la tarjeta solo puede contener mayúsculas y espacios");
+		alert("El nombre en la tarjeta solo puede contener mayúsculas y espacios");
 		return false;
 	}
 	return true;	

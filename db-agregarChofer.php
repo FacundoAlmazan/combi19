@@ -2,12 +2,39 @@
 	include_once "db-funciones.php";
 	$nombre = $_POST["nombre"];
 	$apellido = $_POST["apellido"];
-	$mail = $_POST["email"];
+	$email = $_POST["email"];
 	$nacimiento = $_POST["nacimiento"];
 	$telefono = $_POST["telefono"];
 	$dni = $_POST["dni"];
-	$usuario = $_POST["usuario"];
+	$user = $_POST["usuario"];
 	$clave = $_POST["clave"];
-	insertarChofer($nombre, $apellido, $mail, $nacimiento, $telefono, $dni, $usuario, $clave); 
-	header("location: pagina-agregar.php?tipo=1#agregado");
+	$nombreValidacion="ASDASKDALhasjdhasjkdasjd";
+	$emailValidacion="ASDASKDALhasjdhasjkdasjd";
+
+	$consulta= "SELECT * from usuarios where nombreusuario='$user'";
+	$respuesta= consultar($consulta);
+	if($respuesta){
+	  	foreach ($respuesta as $respuesta) {
+		 	$nombreValidacion = $respuesta['nombreusuario'];
+	  	}
+	}
+	if($user == $nombreValidacion){
+		header("location: pagina-agregar.php?tipo=1#errorUsuario");
+	}
+	else{
+	  	$consulta= "SELECT email FROM usuarios where email='$email'";
+	  	$respuesta= consultar($consulta);
+	  	if($respuesta){
+			foreach ($respuesta as $respuesta) {
+		  		$emailValidacion= $respuesta['email'];
+			}
+	  	}
+		if($email == $emailValidacion){
+			header("location: pagina-agregar.php?tipo=1#errorMail");
+	  	}
+	  	else{
+			insertarChofer($nombre, $apellido, $email, $nacimiento, $telefono, $dni, $user, $clave); 
+			header("location: pagina-agregar.php?tipo=1#agregado");
+	  	}
+	}
 ?>

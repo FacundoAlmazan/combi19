@@ -348,6 +348,10 @@
 					<h3>Identificacion:</h3>
 					<input id="id" type="text" class="campoTexto" name="idex" value="';
 					echo $datos['identificacion'];
+					if(!isset($_SESSION['id'])){
+						session_start();
+					}
+					$_SESSION['idCombi']=$datos['identificacion'];
 					echo '">
 					<h3>Cant Asientos:</h3>
 					<input id="cantasientos" type="number" class="campoTexto" name="cantasientos" value="';
@@ -672,17 +676,12 @@
 		$respuesta=consultar($consulta);
 		$consultaUsuario= "UPDATE usuarios SET nombre='$nombre', apellido='$apellido' , email='$mail' where email='$emailviejo'";
 		$respuestaUsuario=consultar($consultaUsuario);
-			return true;
 	}
 
 	function updatearLugar($id, $lugar, $provincia){
 		session_start();
 		$consulta ="UPDATE lugares SET lugar='$lugar', provincia='$provincia' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
-		if($respuesta){  
-			return true; }
-		else{ 
-			return false;}
 	}
 
 	
@@ -690,59 +689,35 @@
 		session_start();
 		$consulta ="UPDATE rutas SET origen='$origen', destino='$destino', combi='$combi', km='$km', duracion= '$duracion'  WHERE (id='$id')";
 		$respuesta=consultar($consulta);
-		if($respuesta){  
-			return true; }
-		else{ 
-			return false;}
 	}
 
 	function updatearCombi($id, $modelo, $patente, $cantasientos, $chofer, $tipo,$idex){
 		session_start();
 		$consulta ="UPDATE combis SET identificacion='$idex', modelo='$modelo', patente='$patente', cantasientos='$cantasientos', tipo='$tipo', chofer= '$chofer'  WHERE (identificacion='$id')";
 		$respuesta=consultar($consulta);
-		if($respuesta){  
-			return true; }
-		else{ 
-			return false;}
 	}
 
 	function updatearViaje($id, $ruta, $precio, $fecha, $hora){
 		session_start();
 		$consulta ="UPDATE viajes SET idRuta='$ruta', precio='$precio', fecha='$fecha', hora='$hora' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
-		if($respuesta){  
-			return true; }
-		else{ 
-			return false;}
 	}
 
 	function updatearInsumo($id, $nombre, $precio, $tipo){
 		session_start();
 		$consulta ="UPDATE insumos SET nombre='$nombre', precio='$precio', tipo='$tipo' WHERE (id='$id')";
 		$respuesta=consultar($consulta);
-		if($respuesta){  
-			return true; }
-		else{ 
-			return false;}
 	}
 
 	function updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento){
-			$gold= $_SESSION['gold'];
-			$tipo= $_SESSION['tipo'];
-			$id=$_SESSION['id'];
-			$consulta="UPDATE usuarios SET nombre='$nombre',apellido='$apellido',nombreusuario='$user',email='$email',dni='$dni',clave='$pass',nacimiento='$nacimiento',tipo='$tipo',gold='$gold' where (id='$id')";
-	    	$resultado=consultar($consulta);
-			if($resultado){
-				echo '<script language="javascript">alert("Se han actualizado los datos del perfil");</script>';
-				include "pagina-perfil.php";
-				//include "index.php";
-				return true;
-			}
-			else{
-				include "pagina-perfil.php";
-				return false;
-			}
-		}
+		$gold= $_SESSION['gold'];
+		$tipo= $_SESSION['tipo'];
+		$id=$_SESSION['id'];
+		$consulta="UPDATE usuarios SET nombre='$nombre',apellido='$apellido',nombreusuario='$user',email='$email',dni='$dni',clave='$pass',nacimiento='$nacimiento',tipo='$tipo',gold='$gold' where (id='$id')";
+		$resultado=consultar($consulta);
+		echo '<script language="javascript">alert("Se han actualizado los datos del perfil");</script>';
+		include "pagina-perfil.php";
+	}
 	
 
 	function agregarChofer(){
