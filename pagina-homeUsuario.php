@@ -25,22 +25,36 @@
 			<h1 class="titulo"> Inventario del negocio </h1>
 			<div class="row">
 				<div class="column">
-				<a class="item" href="pagina-comentarios.php">
+					<a class="item" href="pagina-comentarios.php">
 						<p class="item">COMENTARIOS</p>
 					</a>
-<div id="myModal" class="modal">
-<!-- POP UP Ventana OCULTA -->
-<div class="modal-content">
-  <span class="close">X</span>
-  <h1> Ayudanos a mejorar con tu comentario! </h2>
-  <form id="coment" method="POST" action="db-agregarComentario.php">
-			<h3>Comentario&#128227;</h3>
-			<textarea name="mensaje" form="coment" id="mensaje"placeholder="Comparte tu opinión!"></textarea>
-			<br>
-			<input type="submit" value="Enviar comentario">
-		</form>
-</div>
-</div> 
+					<div id="myModal" class="modal">
+						<!-- POP UP Ventana OCULTA -->
+						<div class="modal-content">
+							<span class="close">X</span>
+							<h1> Ayudanos a mejorar con tu comentario! </h2>
+							<form id="coment" method="POST" onsubmit="return checkComentario()" action="db-agregarComentario.php">
+									<h3>Comentario&#128227;</h3>
+									<textarea name="mensaje" form="coment" id="comentario" placeholder="Comparte tu opinión!"></textarea>
+									<br>
+									<input type="submit" value="Enviar comentario">
+								</form>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+		<div class="bloque">
+			<h1 class="titulo"> Viajes </h1>
+			<div class="row">
+				<div class="column">
+					<a class="item" href="pagina-listarViajes.php">
+					<p class="item">Ver viajes</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 					<!-- Cerrar / Abrir el Pop Up -->
 <script>
 var modal = document.getElementById("myModal");
@@ -64,19 +78,6 @@ window.onclick = function(event) {
 } </script>
 <!-- Termina el POP UP -->
 
-				</div>
-				<div class="column">	
-				</div>
-			</div>
-		</div>
-		<div class="bloque">
-		<h1 class="titulo"> Viajes </h1>
-			<div class="row">
-				<div class="column">
-				<a class="item" href="pagina-listarViajes.php">
-						<p class="item">Ver viajes</p>
-					</a>
-		</div>
-	</div>
+<script src="scripts/script-comentario.js"></script> 
 </body>
 </html>

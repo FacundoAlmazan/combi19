@@ -72,6 +72,7 @@ li img{
   	transform: translate(-50%, 0%);
   	width:auto;
   	text-align: center;
+	height:70%;
 }
 
 .bloque{
@@ -182,24 +183,4 @@ li img{
 	text-decoration: none;
 	cursor: pointer;
   }
-  /* Cosas de pagina-Comentario */
-#comentario{
-		color:white!important;
-        font-weight: 600px!important;
-	}
-	div .prueba{
-		display:block;
-		background:rgba(0,0,0,0.5);
-		width:auto;
-		height:auto;
-		border:1px solid black;
-	}
-	.comentarioEliminar{
-		text-decoration: none!important;
-		font-weight: bold;
-		color:darkred;
-	}
-	.comentarioEliminar:hover{
-		font-size: 16px;
-		color:red;
-	}
+

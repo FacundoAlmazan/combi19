@@ -730,6 +730,11 @@
 		include "pagina-perfil.php";
 	}
 	
+	function updatearComentario($mensaje, $idComentario){
+		session_start();
+		$consulta= "UPDATE comentarios SET comentario='$mensaje' WHERE (id='$idComentario')";
+		consultar($consulta);
+	}
 
 	function agregarChofer(){
 		?>
