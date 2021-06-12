@@ -7,8 +7,11 @@
 	$chofer = $_POST["chofer"];
 	$tipo = $_POST["tipocombi"];
 	$idex = $_POST["idex"];
+	if(!isset($_SESSION['id'])){
+		session_start();
+	}
 	$idSesion= $_SESSION['idCombi'];
-	if($idex == $idSession){
+	if($idex == $idSesion){
 		updatearCombi($id, $modelo, $patente, $cantasientos, $chofer, $tipo, $idex);
 		header("location: pagina-listar.php?tipo=2#modificado");
 	}
@@ -21,7 +24,7 @@
 				$idValidacion= $respuesta['identificacion'];
 			}
 		}
-		if($id == $idValidacion){
+		if($idex == $idValidacion){
 			header("location: pagina-ver.php?tipo=2&id=$id#errorId");
 		}
 		else{

@@ -305,8 +305,14 @@
 					<h3>Apellido:</h3>
 					<input id="apellido" type="text" class="campoTexto" name="apellido" value="';
 					echo $datos['apellido'];
+					if(!isset($_SESSION['id'])){
+						session_start();
+					}
+					$_SESSION['idUserChofer']=$datos['idUsuario'];
+					
 					echo '">
-					<h3>Email:</h3>
+					<h3>Email:';
+					echo '</h3>
 					<input id="email" type="text" class="campoTexto" name="email" value="';
 					echo $datos['email'];
 					echo '">
@@ -614,8 +620,13 @@
 		session_start();
 		$consulta= "INSERT INTO usuarios(nombre, apellido, nombreusuario, email, dni, clave, nacimiento, tipo, gold) VALUES('$nombre','$apellido','$usuario','$mail','$dni','$clave','$nacimiento','2','0')";
 		consultar($consulta);
+		$consulta="SELECT MAX(id) AS id FROM usuarios";
+					$respuesta= consultar($consulta);
+                    foreach($respuesta as $respuesta){
+						$idUltimo=$respuesta['id'];
+					}
 		$nombrecompleto=$apellido.', '.$nombre;
-		$consulta= "INSERT INTO choferes(nombre, apellido,usuario, email, telefono) VALUES('$nombre','$apellido','$usuario','$mail','$telefono')";
+		$consulta= "INSERT INTO choferes(nombre, apellido,usuario, email, telefono, idUsuario) VALUES('$nombre','$apellido','$usuario','$mail','$telefono','$idUltimo')";
 		consultar($consulta);
 	}
 
