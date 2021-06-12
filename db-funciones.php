@@ -189,7 +189,7 @@
 		}
 	}
 	function listarViajesUsuario(){
-		$consulta= "SELECT * from viajes";
+		$consulta= "SELECT * from viajes where estado='1' and asientosDisp>0";
 		$respuesta=consultar($consulta);
 		$rest= $respuesta;
 		if($respuesta){
@@ -236,6 +236,63 @@
 		if(mysqli_num_rows ($rest) === 0){
 			echo '<h2 style="color:white">No hay viajes en el catálogo</h2>';
 		}
+	}
+
+	function listarBusqueda($o,$d,$f){
+		$consulta= "SELECT * from viajes where (estado='1' and asientosDisp>0 and fecha='$f')";
+		$respuesta=consultar($consulta);
+		$rest= $respuesta;
+		if($respuesta){
+			foreach ($respuesta as $respuesta){
+				$rutId=$respuesta['idRuta'];
+				$consulta22="SELECT * from rutas where id='$rutId'";
+				$respuesta22= consultar($consulta22);
+				foreach($respuesta22 as $respuesta22){
+					$origen=$respuesta22['origen'];
+					$destino=$respuesta22['destino'];
+				}
+				if($origen== $o && $destino==$d){
+			   	echo '<a class="item"';
+				echo' href="pagina-comprarViaje.php?idViaje=';
+			   	echo $respuesta['id'];
+			   	echo '">'; 
+				echo' <div class="column">
+					<p>RUTA : ';
+					$idR=$respuesta['idRuta'];
+					$consulta1= "SELECT * from rutas where id='$idR'";
+					$ans=consultar($consulta1);
+					foreach($ans as $ans){
+						echo $ans['origen']. " ---> " . $ans['destino'];
+					}
+					echo " PRECIO:";
+					if(!isset($_SESSION)){
+						session_start();
+					 }
+					 if($_SESSION['gold']==1){
+						 echo '<strike>';
+						 echo $respuesta['precio'];
+						 echo '</strike>';
+						 echo '->';
+						 $precio=$respuesta['precio'];
+						 $descuento= $precio*0.1;
+						 $precio= $precio-$descuento;
+						 echo $precio;
+					 }
+					 else{
+					 echo'<p>';
+					 echo $respuesta['precio'];
+					 echo '</p>';}
+					echo " FECHA:";
+					echo $respuesta['fecha'];
+					echo" HORA:";
+					echo $respuesta['hora'];
+					echo " ASIENTOS DISPONIBLES:";
+                     echo $respuesta['asientosDisp'];
+				echo "</p></div></a>";
+					 }
+		   	}
+		}
+
 	}
     
 	function listarInsumos(){
