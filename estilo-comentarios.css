@@ -65,29 +65,23 @@ li img{
 }
 
 .content{
-	background:white;
-	display:flex;
-	margin-top: 50px;
-	margin-bottom:-12%;
-	position:relative; 
-	left: 50%;
-  	position: absolute;
-  	transform: translate(-50%, 0%);
+	margin-top: 20px;
   	width:auto;
   	text-align: center;
 	height:auto;
-	margin-bottom:100px;
 	padding:inherit;
 }
 
 .bloque{
 	display:block;
+	position:relative;
 	background:rgba(0,0,0,0.5);
-	min-width:600px;
+	min-width:690px;
 	width:auto;
 	height:auto;
 	border:1px solid black;
-	margin:10px;
+	margin-bottom:50px;
+	margin-top:30px;
 }
 
 .item p{
@@ -106,21 +100,50 @@ li img{
 	opacity:1;
 }
 
+.btn{
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	display:block;
+	background-color:white;
+	margin:auto; 
+	border:7px inset rgb(92, 120, 211);
+	height:120px;
+	overflow:auto;
+	width: 70%;
+	max-width:600px;
+	font-weight:bolder;
+	padding:15px;
+	word-wrap: break-word;
+	font-size:19px;
+	color:black;
+	margin-bottom:25px;
+	text-decoration:none;
+}
+
+.btn:hover{
+	background:url("img/editar.png");
+	border:7px groove green;
+	text-decoration-line: underline;
+	cursor:pointer;
+}
+
   /* Cosas de pagina-Comentario */
 
 #comentario{
 		font-size:20px;
 		font-weight:bold;
+		word-wrap: break-word;
 		
 	}
-	div .prueba{
+	.prueba{
+		font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 		display:block;
 		background-color:white;
 		margin:auto; 
-		border:2px solid black;
-		height:110px;
+		border:7px inset rgba(74, 90, 161, 0.465);
+		height:120px;
 		overflow:auto;
 		width: 70%;
+		max-width:600px;
 		font-weight:bold;
 		padding:15px;
 		word-wrap: break-word;
@@ -128,6 +151,7 @@ li img{
 		color:black;
 		margin-bottom:25px;
 	}
+
 	.comentarioEliminar{
 		text-decoration: none!important;
 		font-weight: bold;
@@ -137,5 +161,7 @@ li img{
 		font-size: 16px;
 		color:red;
 	}
+
+	
 
 	
