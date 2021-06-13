@@ -16,7 +16,13 @@
 	    <?php if($_SESSION['tipo']==1){
 			  echo '<li><a class="logo" href=';
 			  echo "'pagina-homeUsuario.php'><img src=";
-			  echo '"img/avatar.png"></a></li>';}
+			  echo '"img/avatar.png"></a></li>';
+
+			  if(!isset($_SESSION['gold'])){
+				  session_start();
+			  }
+			  if($_SESSION['gold']==1){
+				 echo '<li><img src="img/gold-member-logo.png"></li>'; } }
 			 elseif($_SESSION['tipo']==2){
 				echo '<li><a class="logo" href=';
 				echo "'pagina-homeChofer.php'><img src=";

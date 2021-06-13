@@ -16,6 +16,12 @@
 <body>
 	 <ul>
 	 	<li><a class="logo" href='pagina-homeUsuario.php'><img src="img/avatar.png"></a></li>
+		 <?php 
+		 if(!isset($_SESSION['gold'])){
+			 session_start();
+		 }
+		 if($_SESSION['gold']==1){
+			echo '<li><img src="img/gold-member-logo.png"></li>'; } ?>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
 	</ul> 
