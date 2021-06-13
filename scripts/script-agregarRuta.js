@@ -70,4 +70,7 @@
 		if (window.location.hash == "#error"){
 			alert("El origen y el destino no pueden ser el mismo");
 		}
+		if (window.location.hash == "#errorRepetido"){
+			alert("No se puede crear una ruta con los campos origen, destino y combi iguales a una existente");
+		}
 	}

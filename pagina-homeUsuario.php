@@ -1,6 +1,7 @@
 <?php
 	include_once "session.php";
 	$a = new autenticacion();
+	include_once"db-funciones.php";
 	$a->validar_sesion();
 	$a->validar_rol(1);
 	$_SESSION['url']=1;
@@ -18,8 +19,20 @@
 	 	<li><a class="logo" href='pagina-homeUsuario.php'><img src="img/avatar.png"></a></li>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
-		<li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>
-	</ul> 
+		<?php 
+		$MiId=$_SESSION['id'];
+		$consulta="SELECT * from pasajes where idUsuario='$MiId'";
+		$result=consultar($consulta);
+		$comprobacion=FALSE;
+		foreach($result as $result){
+            if(isset($result['idUsuario'])){}
+			   $comprobacion=TRUE;
+		}
+		if($comprobacion){
+              echo '
+			  <li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>';
+		}
+		?>	</ul> 
 	<div class="content">
 		<div class="bloque">
 			<h1 class="titulo"> Inventario del negocio </h1>
