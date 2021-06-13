@@ -6,6 +6,23 @@
 	$combi = $_POST["combi"];
 	$km = $_POST["km"];
 	$duracion = $_POST["duracion"];
-	updatearRuta($id, $origen, $destino, $combi, $km, $duracion);
-	header("location: pagina-listar.php?tipo=4#modificado");
+
+	$consulta="SELECT * from rutas where (origen='$origen' and destino='$destino' and combi='$combi' and NOT id='$id')";
+	$resultado= consultar($consulta);
+	if($origen == $destino){
+		header("location: pagina-listar.php?tipo=4#errorOrigDest");	
+	}
+	else{
+		foreach($resultado as $resultado){
+			if(isset($resultado['origen'])){
+				$bool=1; }
+		}
+	}
+	if(isset($bool)){
+		header("location: pagina-listar.php?tipo=4#errorRepetidoRuta");
+	}
+	else{
+		updatearRuta($id, $origen, $destino, $combi, $km, $duracion);
+		header("location: pagina-listar.php?tipo=4#modificado");
+	}
 ?>

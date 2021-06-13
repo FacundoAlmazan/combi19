@@ -98,31 +98,19 @@ li img{
 .item{
 	display:block;	
 	text-decoration:none;
-	border: 1px solid black;
-	margin:10px;
+	border: 10px solid black;
+	margin:1px;
 	opacity:0.7;
-	background: white;
+	background: black;
 	min-width:500px;
-}
-
-.item:hover{	
-	opacity:1;
-	border: 2px solid black;
-}
-
-.item p{
-	font-size:20px;
+	font-size:26px;
 	font-weight:bold;
-	color: black;
+	color: white;
 	opacity:1;
 	margin:14px;
 	word-wrap: break-word;
 }
 
-.item p:hover{
-	text-shadow: 0 0 8px white, 0 0 4px black;
-	opacity:1;
-}
 .busquedaLetra{
 	color: white !important;
 }
