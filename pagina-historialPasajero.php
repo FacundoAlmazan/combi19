@@ -23,10 +23,11 @@
 	<div class="content">
 		<div class="bloque">
             <?php
-                $consulta = "SELECT DISTINCT idViaje FROM pasajes WHERE idUsuario = $id";
+                $consulta = "SELECT DISTINCT idViaje,id FROM pasajes WHERE idUsuario = $id";
                 $datos = consultar($consulta);
                 if (mysqli_num_rows($datos) != 0){
                     foreach ($datos as $dato){
+                        $idPasaje= $dato['id'];
                         $idViaje = $dato['idViaje'];
                         $consulta = "SELECT * FROM viajes WHERE id= $idViaje";
                         $datos = consultar($consulta);
@@ -55,9 +56,21 @@
                                     $precio = $dato['precio'];
                                     $fecha = $dato['fecha'];
                                     $hora = $dato['hora'];
+                                    $estado = $dato['estado'];
                                     $asientos = $dato['asientos'];
-                                    echo "PRECIO:$precio FECHA:$fecha HORA:$hora ASIENTOS:$asientos";
-                                echo '</div';
+                                    $disp= $dato['asientosDisp'];
+                                    echo "PRECIO:$precio FECHA:$fecha HORA:$hora ASIENTOS:$disp"; echo "/"; echo $asientos;
+                                    if($estado=='1'){
+                                        echo'<br>';
+                                        echo '<a class="canViaje" href="db-cancelarViaje.php?idViaje=';
+                                        echo $idViaje;
+                                        echo '&idPasaje=';
+                                        echo $idPasaje;
+                                        echo'">  Cancelar viaje</a>';
+                                       
+                                    }    
+                                echo '</div>';
+                                echo "<br> </br>";
                             }
                         }
                     }
