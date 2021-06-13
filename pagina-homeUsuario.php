@@ -1,6 +1,7 @@
 <?php
 	include_once "session.php";
 	$a = new autenticacion();
+	include_once"db-funciones.php";
 	$a->validar_sesion();
 	$a->validar_rol(1);
 	$_SESSION['url']=1;
@@ -32,7 +33,16 @@
 			  <li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>';
 		}
 		?>	</ul> 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 651da343a9db71102f8c2bec2760dfb3d762ec3b
+>>>>>>> 4a6b223563cbd4ef358f73da9939f87c236e8d7c
 	</ul> 
+=======
+>>>>>>> 43f80b9776cec460bd44cf2f9cad31356e4e8846
 	<div class="content">
 		<div class="bloque">
 			<h1 class="titulo"> Inventario del negocio </h1>
