@@ -18,7 +18,20 @@
 	 	<li><a class="logo" href='pagina-homeUsuario.php'><img src="img/avatar.png"></a></li>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
-		<li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>
+		<?php 
+		$MiId=$_SESSION['id'];
+		$consulta="SELECT * from pasajes where idUsuario='$MiId'";
+		$result=consultar($consulta);
+		$comprobacion=FALSE;
+		foreach($result as $result){
+            if(isset($result['idUsuario'])){}
+			   $comprobacion=TRUE;
+		}
+		if($comprobacion){
+              echo '
+			  <li><button id="myBtn">Dejanos tu opinión&#11088;</button> </li>';
+		}
+		?>	</ul> 
 	</ul> 
 	<div class="content">
 		<div class="bloque">
@@ -49,10 +62,15 @@
 			<div class="row">
 				<div class="column">
 					<a class="item" href="pagina-listarViajes.php">
-					<p class="item">Ver viajes</p>
+					<p class="item">VIAJES</p>
 					</a>
 				</div>
 			</div>
+			<div class="column">
+					<a class="item" href="pagina-historialPasajero.php">
+					<p class="item">HISTORIAL</p>
+					</a>
+				</div>
 		</div>
 	</div>
 					<!-- Cerrar / Abrir el Pop Up -->

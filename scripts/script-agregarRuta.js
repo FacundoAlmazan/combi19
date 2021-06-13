@@ -5,7 +5,7 @@
 	var duracion = document.getElementById("duracion");
 
 	function checkRuta(){
-		return validarOrigen() && validarDestino() && validarCombi() && validarKm() && validarDuracion();
+		return validarOrigen() && validarDestino() && validarRepeticion() && validarCombi() && validarKm() && validarDuracion();
 	}
 
 	function validarOrigen(){
@@ -19,6 +19,14 @@
 	function validarDestino(){
 		if(destino.value =="x"){
 			alert("Selecciona un destino");
+			return false;
+		}
+		return true;
+	}
+
+	function validarRepeticion(){
+		if(origen.value == destino.value){
+			alert("El origen y el destino no pueden ser iguales");
 			return false;
 		}
 		return true;
@@ -69,5 +77,8 @@
 		}
 		if (window.location.hash == "#error"){
 			alert("El origen y el destino no pueden ser el mismo");
+		}
+		if (window.location.hash == "#errorRepetido"){
+			alert("No se puede crear una ruta con los campos origen, destino y combi iguales a una existente");
 		}
 	}
