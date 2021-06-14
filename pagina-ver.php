@@ -42,6 +42,7 @@
 	<h1 class="titulo"> Ver <?php echo $categoria;?></h1>
 
 	<div class="content">
-		<?php echo verDetalle($id,$tipo); ?>				
+		<?php echo verDetalle($id,$tipo); ?>	
+		<script src="scripts/script-ver.js"></script> 			
 </body>
 </html>
