@@ -76,11 +76,9 @@ li img{
 
 .bloque{
 	display:block;
-	background:rgba(0,0,0,0.5);
 	min-width:600px;
 	width:auto;
 	height:auto;
-	border:1px solid black;
 }
 
 .row {
@@ -141,7 +139,7 @@ li img{
 	border-bottom: 1px solid #fff;
 	outline: none;
 	height: 40px;
-	color: #fff;
+	color: rgb(5, 5, 5);
 	font-size: 16px;
   }
   
