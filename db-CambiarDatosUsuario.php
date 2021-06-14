@@ -36,9 +36,11 @@
   }
   else{
   updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
+  header("location: pagina-perfil.php#modificado");
   }
 }
 else{
   updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
+  header("location: pagina-perfil.php#modificado");
 }
 ?>

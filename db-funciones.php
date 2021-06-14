@@ -783,8 +783,6 @@
 		$id=$_SESSION['id'];
 		$consulta="UPDATE usuarios SET nombre='$nombre',apellido='$apellido',nombreusuario='$user',email='$email',dni='$dni',clave='$pass',nacimiento='$nacimiento',tipo='$tipo',gold='$gold' where (id='$id')";
 		$resultado=consultar($consulta);
-		echo '<script language="javascript">alert("Se han actualizado los datos del perfil");</script>';
-		include "pagina-perfil.php";
 	}
 	
 	function updatearComentario($mensaje, $idComentario){

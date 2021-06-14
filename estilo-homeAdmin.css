@@ -76,11 +76,9 @@ li img{
 
 .bloque{
 	display:block;
-	background:rgba(0,0,0,0.5);
 	min-width:600px;
 	width:auto;
 	height:auto;
-	border:1px solid black;
 }
 
 .row {
@@ -122,3 +120,46 @@ li img{
 	text-shadow: 0 0 8px white, 0 0 4px black;
 	opacity:1;
 }
+
+.login-box {
+	width: 520px;
+	height: auto;
+	background: rgba(80,10,11,0.3);
+	color: #fff;
+	margin-left: 5%;
+	box-sizing: border-box;
+	padding: 50px 20px;
+	border:1px solid white;
+  }
+
+  .login-box input {
+	width: 100%;
+	margin-bottom: 20px;
+	border: none;
+	border-bottom: 1px solid #fff;
+	outline: none;
+	height: 40px;
+	color: rgb(0, 0, 0);
+	font-size: 16px;
+  }
+  
+  .login-box input[type="date"] {
+	font-family: sans-serif;
+  }
+
+  .login-box input[type="submit"] {
+	border: none;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	background-color: maroon;
+	font-size: 18px;
+	border-radius: 20px;
+	margin-top: 0px;
+  }
+  
+  .login-box input[type="submit"]:hover {
+	cursor: pointer;
+	background: #ffc107;
+	color: #000;
+  }
