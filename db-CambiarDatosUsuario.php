@@ -11,6 +11,7 @@
   $dni = $_POST['dni'];
   $nacimiento=$_POST['nacimiento'];
   $userActual= $_SESSION['nombreusuario'];
+  $emailActual= $_SESSION['email'];
   $nombreValidacion="";
   if( $user !=  $userActual){
     $consulta= "SELECT * from usuarios where nombreusuario='$user'";
@@ -33,14 +34,13 @@
       document.getElementById("pw").value= <?php echo json_encode($pass); ?>;
       </script>
         <?php
+    }
+    else{
+      updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
+      header("location: pagina-perfil.php#modificado");
+    }
+  }else{
+    updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
+    header("location: pagina-perfil.php#modificado");
   }
-  else{
-  updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
-  header("location: pagina-perfil.php#modificado");
-  }
-}
-else{
-  updatearUsuario($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento);
-  header("location: pagina-perfil.php#modificado");
-}
 ?>

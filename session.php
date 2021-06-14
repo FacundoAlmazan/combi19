@@ -15,6 +15,7 @@ class autenticacion {
                 $_SESSION['id']= $datos_usuario['id'];
                 $_SESSION['tipo']=$datos_usuario['tipo'];
                 $_SESSION['nombreusuario']=$datos_usuario['nombreusuario'];
+                $_SESSION['email']=$datos_usuario['email'];
                 $tipo=$_SESSION['tipo'];
                 switch($tipo){
                   case 1:
