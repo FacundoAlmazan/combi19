@@ -21,7 +21,7 @@
 			 session_start();
 		 }
 		 if($_SESSION['gold']==1){
-			echo '<li><img src="img/gold-member-logo.png"></li>'; } ?>
+			echo '<li><img src="img/gold-member-logo.png" style="border:none"></li>'; } ?>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
 	</ul> 
@@ -76,5 +76,6 @@
 	 ?>
 			</div>
 	</div>
+	<script type="text/javascript" src="scripts/script-listarViajes.js"></script>
 </body>
 </html>

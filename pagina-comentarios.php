@@ -21,7 +21,7 @@
 			 session_start();
 		 }
 		 if($_SESSION['gold']==1){
-			echo '<li><img src="img/gold-member-logo.png"></li>'; } ?>
+			echo '<li><img src="img/gold-member-logo.png" style="border:none"></li>'; } ?>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
 	</ul> 
@@ -32,7 +32,7 @@
 		$consulta= "SELECT * from comentarios";
 		$respuesta=consultar($consulta);
 		$id=$_SESSION['id'];
-		 if($respuesta){
+		if (mysqli_num_rows($respuesta) != 0){
 			foreach ($respuesta as $respuesta){
 				if($respuesta['idUser']!=$id){
 					echo '<div class="prueba">';
@@ -65,6 +65,9 @@
 
 		    }
 		}
+		else{
+			echo '<h2 style="color:white"> No hay comentarios </h2>';
+		}
 	 ?>
 		</div>
 		<div class="bloque" style="float:right; margin-right:10%">
@@ -73,19 +76,23 @@
 			$id=$_SESSION['id'];
 			$consulta= "SELECT * from comentarios where idUser='$id'";
 	        $respuestas=consultar($consulta);
-		if($respuestas){ 
-			foreach ($respuestas as $respuesta){
-				$idComentario=$respuesta['id'];
-				$comentario=$respuesta['comentario'];
-				echo '<button class="btn" onclick="location.href=';
-				echo "'pagina-editarComentario.php?idComentario=$idComentario'";
-				echo '">';
-				echo $comentario;
-				echo "</button>";
-		    }	
-		}
+			if (mysqli_num_rows($respuestas) != 0){
+				foreach ($respuestas as $respuesta){
+					$idComentario=$respuesta['id'];
+					$comentario=$respuesta['comentario'];
+					echo '<button class="btn" onclick="location.href=';
+					echo "'pagina-editarComentario.php?idComentario=$idComentario'";
+					echo '">';
+					echo $comentario;
+					echo "</button>";
+				}	
+			}
+			else{
+				echo '<h2 style="color:white"> No hay comentarios </h2>';
+			}
 			?>
 		</div>
 	</div>
+	<script type="text/javascript" src="scripts/script-comentario.js"></script>
 </body>
 </html>

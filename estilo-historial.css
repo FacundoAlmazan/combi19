@@ -120,7 +120,13 @@ li img{
 	  text-decoration: none;
 }
 .canViaje:hover{
-	color:red!important;
+	color:rgb(131, 25, 25)!important;
 	text-decoration: none;
-	font-size:28px;
+}
+
+#fecha{
+	display:none;
+}
+#hora{
+	display:none;
 }

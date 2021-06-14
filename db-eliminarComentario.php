@@ -3,5 +3,5 @@
 	$id=$_GET['idComentario'];
     $consulta= "DELETE from comentarios where id='$id'";
 	$resultado= consultar($consulta);
-	include "pagina-comentarios.php";
+	header("location:pagina-comentarios.php#eliminado");
 ?>

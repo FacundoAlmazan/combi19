@@ -3,11 +3,11 @@
 	var tipo = document.getElementById("tipo");
 	
 	function checkInsumo(){
-		return validarNombre() && validarPrecio() && validarTipo();
+		return (validarPrecio() && validarNombre() && validarTipo());
 	}
 
 	function validarNombre(){
-		if(nombre.value==""){
+		if(nombre.value == ""){
 			alert("El nombre no puede estar vacío");
 			return false;
 		}
@@ -19,12 +19,8 @@
 	}
 
 	function validarPrecio(){
-		if(precio.value=="" || precio.value ==0){
-			alert("El precio no puede estar vacío");
-			return false;
-		}
-		if(!validarNumericos(precio.value)){
-			alert("El precio solo puede contener caracteres numéricos");
+		if(precio.value == ""){
+			alert("Ingrese un precio");
 			return false;
 		}
 		return true;

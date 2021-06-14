@@ -12,5 +12,5 @@
 	$idPasaje=$_GET['idPasaje'];
     $consulta= "DELETE from pasajes where id='$idPasaje'";
 	$resultado= consultar($consulta);
-	include "pagina-historialPasajero.php";
+	header("location:pagina-historialPasajero.php");
 ?>

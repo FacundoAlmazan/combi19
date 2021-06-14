@@ -20,3 +20,12 @@ function validarTamaño(String){
       return false;
     }
   }
+
+  window.onload = function(){
+    if (window.location.hash == "#modificado"){
+        alert("El comentario se ha modificado");
+    }
+    if (window.location.hash == "#eliminado"){
+      alert("El comentario se ha eliminado");
+  }
+}

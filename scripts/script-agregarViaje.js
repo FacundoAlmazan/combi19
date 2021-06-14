@@ -38,7 +38,7 @@ function validarFecha(){
     ty = today.getFullYear();
 	tm = today.getMonth()+1;
     td = today.getDate();
-	if ((ty < intYear) || (ty === intYear && tm < intMonth) || (ty === intYear) && (tm === intMonth) && ( td < intDay)) {
+	if ((ty < intYear) || (ty === intYear && tm < intMonth) || (ty === intYear) && (tm === intMonth) && ( td <= intDay)) {
 		return true;
 	}
     alert("La fecha debe ser mayor a la fecha de hoy");

@@ -5,6 +5,6 @@
 	updatearComentario($mensaje,$id); 
 	$dir=$_SESSION['url'];
 	if ($dir==3){
-		header("location:pagina-comentarios.php");
+		header("location:pagina-comentarios.php#modificado");
 	}
 ?>

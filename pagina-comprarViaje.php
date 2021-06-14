@@ -20,22 +20,23 @@
 			 session_start();
 		 }
 		 if($_SESSION['gold']==1){
-			echo '<li><img src="img/gold-member-logo.png"></li>'; } ?>
+			echo '<li><img src="img/gold-member-logo.png" style="border:none"></li>'; } ?>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir</a></li>
  		<li><a href="">Perfil</a></li> 
 	</ul>
 	<div class="content">
+		<h1> Detalle viaje </h1>
 		<?php echo verViaje($id); ?>
 		<br>	
-		<h1> Comprar viaje </h3>
-		<form  method="POST" action="db-comprarPasaje.php?id=<?php echo $id?>">
+		<h1> Comprar viaje </h1>
+		<form  method="POST" onsubmit="return checkCompra()" action="db-comprarPasaje.php?id=<?php echo $id?>">
 		<?php 
 		$consulta= "SELECT * from viajes where (id='$id')";
 		$respuesta = consultar($consulta);
 		$datos = $respuesta;
 		if($respuesta){
 			foreach ($datos as $datos){	
-				echo "<h4>Elegi los insumos para tu viaje</h6>";
+				echo "<h4>Elegí los insumos para tu viaje</h6>";
 				$insumos=explode(",",$datos['insumos']);
 				foreach ($insumos as $insumos){
 					$insumoInt= (int)$insumos;
@@ -53,11 +54,15 @@
 			}
 		}
 				?>
-				 <input id="numTarjeta" type="text" class="campoTexto" name="numTarjeta" placeholder="Ingrese su número de tarjeta">
-          <input id="claveTarjeta" type="password" class="campoTexto" name="claveTarjeta" placeholder="Ingrese el codigo de seguridad de su tarjeta">
-          <input id="nombreTarjeta" type="text" class="campoTexto" name="nombreTarjeta" placeholder="Ingrese su nombre y apellido">
-		  <input type="submit" value="Ingresar">
-		</form>
-	<script type="text/javascript" src="scripts/script-agregarChofer.js"></script>
+				<br>
+				<br>
+				<h2> Datos de tarjeta de crédito </h2>
+				<input id="numTarjeta" type="text" class="campoTexto" name="numTarjeta" placeholder="Ingrese número de tarjeta">
+				<input id="claveTarjeta" type="password" class="campoTexto" name="claveTarjeta" placeholder="Ingrese el codigo de seguridad">
+				<input id="vencimientoTarjeta" type="text" class="campoTexto" name="vencimientoTarjeta" onfocus="(this.type='date')" placeholder="Ingrese vencimiento de la tarjeta">
+				<input id="nombreTarjeta" type="text" class="campoTexto" name="nombreTarjeta" placeholder="Ingrese su nombre y apellido">
+				<input class="modificar" type="submit" value="Comprar">
+			</form>
+		<script type="text/javascript" src="scripts/script-comprarViaje.js"></script>
 </body>
 </html>

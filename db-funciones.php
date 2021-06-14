@@ -173,7 +173,7 @@
 						$consultaIns= "SELECT * from insumos where id='$insumoInt'";
 						$resultadoIns= consultar($consultaIns);
 						foreach($resultadoIns as $resultadoIns){
-							$str= $str . " " . $resultadoIns['nombre']."+";
+							$str= $str . "(" . $resultadoIns['nombre'].")";
 
 						}
 					}

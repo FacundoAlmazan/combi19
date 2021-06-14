@@ -30,17 +30,17 @@ $id=$_GET['id'];
         if($resultado){
             foreach ($resultado as $resultado){
                 $nombre = $resultado['origen'];
-             }
-        if(isset($nombre)){
-            echo'<script> alert ("Esta combi forma parte de una/s ruta/s, no se puede eliminar");</script>';
-            include "pagina-homeAdmin.php";
-            return false;
+            }
+            if(isset($nombre)){
+                echo'<script> alert ("Esta combi forma parte de una/s ruta/s, no se puede eliminar");</script>';
+                include "pagina-homeAdmin.php";
+                return false;
+            }
+            else{
+                $consulta="DELETE from combis where (identificacion='$id')";
+            }
         }
-        else{
-        $consulta="DELETE from combis where (identificacion='$id')";
     }
-}
-}
     elseif($tipo=='1'){
         $verificacion="SELECT * from choferes where (id='$id')";
         $resultado = consultar($verificacion);
@@ -66,14 +66,43 @@ $id=$_GET['id'];
         }
     }
     elseif($tipo=='4'){
-        $consulta="DELETE from rutas where (id='$id')";
+        $consulta = "SELECT * FROM viajes WHERE idRuta=$id";
+        $resultados = consultar($consulta);
+        if($resultados){
+            foreach ($resultados as $resultado){
+                $ruta = $resultado['idRuta'];
+            }
+            if(isset($ruta)){
+                echo'<script> alert ("Esta ruta forma parte de un viaje, no se puede eliminar");</script>';
+                include "pagina-homeAdmin.php";
+                return false;
+            }
+            else{
+                $consulta="DELETE from rutas where (id='$id')";
+            }
+        } 
     }
     elseif ($tipo=='5'){
         $consulta="DELETE from viajes where (id='$id')";
     }
     elseif ($tipo=='6'){
-        $consulta="DELETE from insumos where (id='$id')";
+        $consulta = "SELECT * FROM viajes";
+        $resultados = consultar($consulta);
+        if($resultados){
+            foreach ($resultados as $resultado){
+                $insumos = $resultado['insumos'];
+                $str_arr = explode (",", $insumos);
+                foreach ($str_arr as $str_arr) {
+                    if($str_arr==$id){
+                        echo'<script> alert ("Esta insumo forma parte de un viaje, no se puede eliminar");</script>';
+                        include "pagina-homeAdmin.php";
+                        return false;
+                    }
+                }
+            }
+            $consulta="DELETE from insumos where (id='$id')";
+        }
     }
 $resultado= consultar($consulta);
-include "pagina-homeAdmin.php";
+header("location: pagina-homeAdmin.php?#eliminado");
 ?>

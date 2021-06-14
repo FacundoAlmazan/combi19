@@ -22,7 +22,7 @@
 				  session_start();
 			  }
 			  if($_SESSION['gold']==1){
-				 echo '<li><img src="img/gold-member-logo.png"></li>'; } }
+				 echo '<li><img src="img/gold-member-logo.png" style="border:none"></li>'; } }
 			 elseif($_SESSION['tipo']==2){
 				echo '<li><a class="logo" href=';
 				echo "'pagina-homeChofer.php'><img src=";

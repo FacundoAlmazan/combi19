@@ -4,6 +4,6 @@
 	insertarComentario($mensaje); 
 	$dir=$_SESSION['url'];
 	if ($dir==1){
-		header("location:pagina-homeUsuario.php");
+		header("location:pagina-homeUsuario.php#comentarioAgregado");
 	}
 ?>

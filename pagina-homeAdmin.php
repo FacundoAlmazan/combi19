@@ -50,5 +50,6 @@
 			<h1 class="titulo"> Listados de reportes </h1>
 		</div>
 	</div>
+	<script src="scripts/script-homeAdmin.js"></script> 
 </body>
 </html>

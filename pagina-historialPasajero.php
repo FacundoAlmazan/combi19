@@ -22,7 +22,7 @@
 			 session_start();
 		 }
 		 if($_SESSION['gold']==1){
-			echo '<li><img src="img/gold-member-logo.png"></li>'; } ?>
+			echo '<li><img src="img/gold-member-logo.png" style="border:none"></li>'; } ?>
   		<li><a href="cerrarSesion.php" id="btn-cerrar">Salir </a></li>
 		<li><a href="pagina-perfil.php"> Perfil </a></li>
 	</ul> 
@@ -48,6 +48,7 @@
                                             $origen = $datoRuta['origen'];
                                             $destino = $datoRuta['destino'];
                                             echo "$origen --> $destino <br>";
+                                            echo "<br>";
                                             $idCombi = ($datoRuta['combi']);
                                             $consulta = "SELECT * FROM combis WHERE identificacion='$idCombi'";
                                             $datosCombi = consultar($consulta);
@@ -65,15 +66,23 @@
                                     $estado = $dato['estado'];
                                     $asientos = $dato['asientos'];
                                     $disp= $dato['asientosDisp'];
-                                    echo "PRECIO:$precio FECHA:$fecha HORA:$hora ASIENTOS:$disp"; echo "/"; echo $asientos;
+                                    echo"<p id='fecha'>$fecha</p>";
+                                    echo"<p>FECHA: $fecha</p>";
+                                    echo"<p>HORA: $hora</p>";
+                                    echo "<p> PRECIO:$precio </p>";
+                                    $ocupados=$asientos - $disp;
+                                    echo "ASIENTOS OCUPADOS:$ocupados"; echo "/"; echo $asientos;
+                                    echo "<br>";
                                     if($estado=='1'){
+                                        echo"<p>ESTADO: PENDIENTE</p>";
                                         echo'<br>';
-                                        echo '<a class="canViaje" href="db-cancelarViaje.php?idViaje=';
+                                        echo '<a class="canViaje" onclick="checkCancelar(); return confirm(';
+                                        echo "'¿Seguro que quieres cancelar tu pasaje?')";
+                                        echo '" href="db-cancelarViaje.php?idViaje=';
                                         echo $idViaje;
                                         echo '&idPasaje=';
                                         echo $idPasaje;
                                         echo'">  Cancelar viaje</a>';
-                                       
                                     }    
                                 echo '</div>';
                                 echo "<br> </br>";
@@ -81,8 +90,12 @@
                         }
                     }
                 }
+                else{
+                    echo'<h3 style="color:white"> No hay viajes para mostrar </h3>';
+                }
             ?>
 		</div>
 	</div>
+    <script src="scripts/script-cancelarViaje.js"></script> 
 </body>
 </html>
