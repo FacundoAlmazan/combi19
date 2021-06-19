@@ -10,7 +10,7 @@
 	$consulta2= "UPDATE viajes SET asientosDisp='$valor' where id='$idViaje'";
 	$resultado2=consultar($consulta2);
 	$idPasaje=$_GET['idPasaje'];
-    $consulta= "DELETE from pasajes where id='$idPasaje'";
+    $consulta= "UPDATE pasajes SET cancelo=1 where id='$idPasaje'";
 	$resultado= consultar($consulta);
 	header("location:pagina-historialPasajero.php");
 ?>

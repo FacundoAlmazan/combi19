@@ -28,8 +28,9 @@
 	</ul> 
 	<div class="content">
 		<div class="bloque">
+        <h1> Viajes realizados / por realizar </h3>
             <?php
-                $consulta = "SELECT DISTINCT idViaje,id FROM pasajes WHERE idUsuario = $id";
+                $consulta = "SELECT DISTINCT idViaje,id FROM pasajes WHERE idUsuario='$id' and cancelo<>1";
                 $datos = consultar($consulta);
                 if (mysqli_num_rows($datos) != 0){
                     foreach ($datos as $dato){
@@ -91,7 +92,68 @@
                     }
                 }
                 else{
-                    echo'<h3 style="color:white"> No hay viajes para mostrar </h3>';
+                    echo'<h4 style="color:white"> No hay viajes para mostrar </h3>';
+                }
+            ?>
+		</div>
+        <div class="bloque">
+        <br></br>
+        <h1> Viajes que cancelaste </h3>
+        <?php
+                $consulta = "SELECT DISTINCT idViaje,id FROM pasajes WHERE idUsuario='$id' and cancelo=1";
+                $datos = consultar($consulta);
+                if (mysqli_num_rows($datos) != 0){
+                    foreach ($datos as $dato){
+                        $idPasaje= $dato['id'];
+                        $idViaje = $dato['idViaje'];
+                        $consulta = "SELECT * FROM viajes WHERE id= $idViaje";
+                        $datos = consultar($consulta);
+                        if (mysqli_num_rows($datos) != 0){
+                            foreach ($datos as $dato){
+                                $idRuta = $dato['idRuta'];
+                                $consulta = "SELECT * FROM rutas WHERE id=$idRuta";
+                                $datosRuta= consultar($consulta);
+                                echo '<div class=item>';
+                                    if (mysqli_num_rows($datosRuta) != 0){
+                                        foreach ($datosRuta as $datoRuta){
+                                            $origen = $datoRuta['origen'];
+                                            $destino = $datoRuta['destino'];
+                                            echo "$origen --> $destino <br>";
+                                            echo "<br>";
+                                            $idCombi = ($datoRuta['combi']);
+                                            $consulta = "SELECT * FROM combis WHERE identificacion='$idCombi'";
+                                            $datosCombi = consultar($consulta);
+                                            if (mysqli_num_rows($datosCombi) != 0){
+                                                foreach ($datosCombi as $datoCombi){
+                                                    $tipo = $datoCombi['tipo'];
+                                                    echo "TIPO DE COMBI:$tipo ";
+                                                }
+                                            }
+                                        }
+                                    }
+                                    $precio = $dato['precio'];
+                                    $fecha = $dato['fecha'];
+                                    $hora = $dato['hora'];
+                                    $estado = $dato['estado'];
+                                    $asientos = $dato['asientos'];
+                                    $disp= $dato['asientosDisp'];
+                                    echo"<p id='fecha'>$fecha</p>";
+                                    echo"<p>FECHA: $fecha</p>";
+                                    echo"<p>HORA: $hora</p>";
+                                    echo "<p> PRECIO:$precio </p>";
+                                    $ocupados=$asientos - $disp;
+                                    echo "ASIENTOS OCUPADOS:$ocupados"; echo "/"; echo $asientos;
+                                    echo "<br>";
+                                        echo"<p>ESTADO: CANCELASTE </p>";
+                                        echo'<br>'; 
+                                echo '</div>';
+                                echo "<br> </br>";
+                            }
+                        }
+                    }
+                }
+                else{
+                    echo'<h4 style="color:white"> No hay viajes para mostrar </h3>';
                 }
             ?>
 		</div>

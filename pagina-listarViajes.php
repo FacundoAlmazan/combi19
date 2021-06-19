@@ -8,6 +8,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php if(isset($_GET['o']) && isset($_GET['d'])){?>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#origen > option[value="<?php echo $_GET['o']?>"]').attr('selected', 'selected');
+	$('#destino > option[value="<?php echo $_GET['d'] ?>"]').attr('selected', 'selected');
+	$('#fecha > option[value="<?php echo $_GET['f'] ?>"]').attr('selected', 'selected');
+});
+</script> <?php }?>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
 	<title>HOME USUARIO</title>

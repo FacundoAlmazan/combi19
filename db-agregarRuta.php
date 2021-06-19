@@ -1,11 +1,15 @@
 <?php
 	include_once "db-funciones.php";
-	$origen = $_POST["origen"];
-	$destino = $_POST["destino"];
+	$LugarIdAndName = explode("-", $_POST['origen']);
+    $origenNombre= $LugarIdAndName[0];
+    $origenId= $LugarIdAndName[1];
+	$DestinoIdAndName = explode("-", $_POST['destino']);
+    $DestinoNombre= $DestinoIdAndName[0];
+    $DestinoId= $DestinoIdAndName[1];
 	$combi = $_POST["combi"];
 	$km = $_POST["km"];
 	$duracion = $_POST["duracion"];
-	$consulta="SELECT * from rutas where (origen='$origen' and destino='$destino' and combi='$combi')";
+	$consulta="SELECT * from rutas where (origen='$origenNombre' and destino='$DestinoNombre' and combi='$combi')";
 	$resultado= consultar($consulta);
 	$bool=FALSE;
 	foreach($resultado as $resultado){
@@ -17,7 +21,7 @@
 		header("location: pagina-agregar.php?tipo=4#errorRepetido");
 	}
 	else{
-	insertarRuta($origen, $destino, $combi, $km, $duracion); 
+	insertarRuta($origenNombre, $DestinoNombre, $combi, $km, $duracion, $origenId, $DestinoId); 
 	header("location: pagina-agregar.php?tipo=4#agregado");
 	}
 ?>

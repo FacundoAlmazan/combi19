@@ -25,7 +25,7 @@
 			}
 		}
 		if($idex == $idValidacion){
-			header("location: pagina-ver.php?tipo=2&id=$id#errorId");
+			header("location: pagina-ver.php?tipo=2&id=$id#errorCombId");
 		}
 		else{
 			updatearCombi($id, $modelo, $patente, $cantasientos, $chofer, $tipo, $idex);

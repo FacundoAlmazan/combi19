@@ -59,4 +59,7 @@
 		if (window.location.hash == "#agregado"){
 			alert("El insumo se ha agregado con exito");
 		}
+		if (window.location.hash == "#InsumoNombre"){
+			alert("Error: El nombre del insumo ya esta en uso");
+		}
 	}

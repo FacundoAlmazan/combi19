@@ -499,11 +499,18 @@
 						<option value=<?php echo'"'; echo $datos['origen']; echo '">';
 						echo $datos['origen']; ?> </option>
 						<?php
-						$consulta = "SELECT lugar FROM lugares";
+						$consulta = "SELECT * FROM lugares";
 						$lugares = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($lugares)) {
-							if($valores[lugar] != $datos[origen]){
-		            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';}
+							if($valores['lugar'] != $datos['origen']){
+								echo '<option value="';
+								echo $valores['lugar'];
+								echo "-";
+								echo $valores['id'];
+								echo '"';
+								echo ">";
+								echo $valores['lugar'];
+								echo '</option>';}
 		          		}
 						?>
 					</select>
@@ -512,11 +519,18 @@
 						<option value=<?php echo'"'; echo $datos['destino']; echo '">';
 						echo $datos['destino']; ?> </option>
 						<?php
-						$consulta = "SELECT lugar FROM lugares";
+						$consulta = "SELECT * FROM lugares";
 						$lugares = consultar($consulta);
 		          		while ($valores = mysqli_fetch_array($lugares)) {
-							if($valores[lugar] != $datos[destino]){
-		            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';}
+							if($valores['lugar'] != $datos['destino']){
+		            		echo '<option value="';
+							echo $valores['lugar'];
+							echo "-";
+							echo $valores['id'];
+							echo '"';
+							echo ">";
+							echo $valores['lugar'];
+							echo '</option>';}
 		          		}
 						?>
 					</select>
@@ -725,9 +739,9 @@
 		$consulta1="INSERT INTO pasajes(idViaje,idUsuario,insumos) VALUES ('$idViaje','$MiId','$str')";
 		$resultado1= consultar($consulta1);
 	}
-	function insertarRuta($origen,$destino,$combi,$km,$duracion){
+	function insertarRuta($origen,$destino,$combi,$km,$duracion,$idO,$idD){
 		session_start();
-		$consulta= "INSERT INTO rutas(origen, destino, combi, km, duracion) VALUES('$origen','$destino','$combi','$km','$duracion')";
+		$consulta= "INSERT INTO rutas(origen, destino, combi, km, duracion , idOrigen , idDestino) VALUES('$origen','$destino','$combi','$km','$duracion','$idO','$idD')";
 		consultar($consulta);
 	}
 
@@ -753,9 +767,9 @@
 	}
 
 	
-	function updatearRuta($id, $origen, $destino, $combi, $km, $duracion){
+	function updatearRuta($id, $origen, $destino, $combi, $km, $duracion, $orId,$desId){
 		session_start();
-		$consulta ="UPDATE rutas SET origen='$origen', destino='$destino', combi='$combi', km='$km', duracion= '$duracion'  WHERE (id='$id')";
+		$consulta ="UPDATE rutas SET origen='$origen', destino='$destino', combi='$combi', km='$km', duracion= '$duracion', idOrigen='$orId', idDestino='$desId'  WHERE (id='$id')";
 		$respuesta=consultar($consulta);
 	}
 
@@ -877,22 +891,36 @@
 			<select id="origen" type="text" class="campoTexto" name="origen">
 				<option value="x">SELECCIONE UN ORIGEN</option>
 				<?php
-				$consulta = "SELECT lugar FROM lugares";
+				$consulta = "SELECT * FROM lugares";
 				$lugares = consultar($consulta);
           		while ($valores = mysqli_fetch_array($lugares)) {
-            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';
-          		}
+					echo '<option value="';
+					echo $valores['lugar'];
+					echo "-";
+					echo $valores['id'];
+					echo '"';
+					echo ">";
+					echo $valores['lugar'];
+					echo '</option>';
+				}
+          		
 				?>
 			</select>
 			<h3>Destino:</h3>
 			<select id="destino" type="text" class="campoTexto" name="destino">
 				<option value="x">SELECCIONE UN DESTINO</option>
 				<?php
-				$consulta = "SELECT lugar FROM lugares";
+				$consulta = "SELECT * FROM lugares";
 				$lugares = consultar($consulta);
           		while ($valores = mysqli_fetch_array($lugares)) {
-            		echo '<option value="'.$valores[lugar].'">'.$valores[lugar].'</option>';
-          		}
+					echo '<option value="';
+					echo $valores['lugar'];
+					echo "-";
+					echo $valores['id'];
+					echo '"';
+					echo ">";
+					echo $valores['lugar'];
+					echo '</option>';}
 				?>
 			</select>
 			<h3>Combi:</h3>
