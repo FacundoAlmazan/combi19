@@ -2,6 +2,7 @@ var numTarjeta= document.getElementById("numTarjeta");
 var claveTarjeta= document.getElementById("claveTarjeta");
 var nombreTarjeta= document.getElementById("nombreTarjeta");
 var vencimientoTarjeta= document.getElementById("vencimientoTarjeta");
+var gold= document.getElementById("gold");
 
 function validarNumTarjeta(){
     if(numTarjeta.value==""){
@@ -113,7 +114,7 @@ function validarNumeros(String){
 }
 
 function checkCompra(){
-    if (vencimientoTarjeta.value!="" || claveTarjeta.value!="" || numTarjeta.value!="" || nombreTarjeta.value!=""){
+    if (vencimientoTarjeta.value!="" || claveTarjeta.value!="" || numTarjeta.value!="" || nombreTarjeta.value!="" || gold.value== "no"){
         return (validarNumTarjeta() && validarClaveTarjeta() && validarNombreTarjeta() && validarVencimientoTarjeta())
     }
     else{
