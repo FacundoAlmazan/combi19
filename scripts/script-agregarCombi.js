@@ -97,4 +97,7 @@
 		if (window.location.hash == "#errorId"){
 			alert("La identificación se encuentra en uso");
 		}
+        if (window.location.hash == "#errorPatente"){
+			alert("La patente se encuentra en uso");
+		}
 	}

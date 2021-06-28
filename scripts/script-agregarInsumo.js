@@ -1,7 +1,7 @@
-	var nombre = document.getElementById("nombre");
+    var nombre = document.getElementById("nombre");
 	var precio = document.getElementById("precio");
 	var tipo = document.getElementById("tipo");
-	
+    
 	function checkInsumo(){
 		return (validarPrecio() && validarNombre() && validarTipo());
 	}

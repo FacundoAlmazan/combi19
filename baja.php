@@ -8,7 +8,7 @@ $id=$_GET['id'];
         foreach ($resultado as $resultado){
            $lugar = $resultado['lugar'];
         }
-        $verificacion2 = "SELECT * from rutas where (origen='$lugar') or (destino='lugar')";
+        $verificacion2 = "SELECT * from rutas where (origen='$lugar') or (destino='$lugar')";
         $resultado2= consultar($verificacion2);
         if(isset($resultado2)){
             foreach ($resultado2 as $resultado2){

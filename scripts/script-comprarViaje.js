@@ -113,5 +113,10 @@ function validarNumeros(String){
 }
 
 function checkCompra(){
-    return validarNumTarjeta() && validarClaveTarjeta() && validarVencimientoTarjeta() && validarNombreTarjeta();
+    if (vencimientoTarjeta.value!="" || claveTarjeta.value!="" || numTarjeta.value!="" || nombreTarjeta.value!=""){
+        return (validarNumTarjeta() && validarClaveTarjeta() && validarNombreTarjeta() && validarVencimientoTarjeta())
+    }
+    else{
+        return true;
+    }
 }

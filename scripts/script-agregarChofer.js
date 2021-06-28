@@ -138,6 +138,9 @@
 		if (window.location.hash == "#errorUsuario"){
 			alert("El nombre de usuario ya existe");
 		}
+        if (window.location.hash == "#dniRepetido"){
+			alert("El dni ya se encuentra en uso");
+		}
 		if (window.location.hash == "#errorMail"){
 			alert("El email ya se encuentra en uso");
 		}

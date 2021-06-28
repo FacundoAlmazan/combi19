@@ -42,7 +42,7 @@
 	</ul> 
 	<div class="content">
 		<div class="bloque">
-			<h1 class="titulo"> Inventario del negocio </h1>
+			<h1 class="titulo"> Otros </h1>
 			<div class="row">
 				<div class="column">
 					<a class="item" href="pagina-comentarios.php">

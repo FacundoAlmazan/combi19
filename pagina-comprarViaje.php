@@ -53,16 +53,63 @@
 				  echo'<br>';	
 			}
 		}
-				?>
-				<br>
-				<br>
-				<h2> Datos de tarjeta de crédito </h2>
-				<input id="numTarjeta" type="text" class="campoTexto" name="numTarjeta" placeholder="Ingrese número de tarjeta">
-				<input id="claveTarjeta" type="password" class="campoTexto" name="claveTarjeta" placeholder="Ingrese el codigo de seguridad">
-				<input id="vencimientoTarjeta" type="text" class="campoTexto" name="vencimientoTarjeta" onfocus="(this.type='date')" placeholder="Ingrese vencimiento de la tarjeta">
-				<input id="nombreTarjeta" type="text" class="campoTexto" name="nombreTarjeta" placeholder="Ingrese su nombre y apellido">
-				<input class="modificar" type="submit" value="Comprar">
-			</form>
-		<script type="text/javascript" src="scripts/script-comprarViaje.js"></script>
+        ?>
+        <br>
+        <style>
+            .collapsible {
+                background-color: #777;
+                color: white;
+                cursor: pointer;
+                padding: 4px;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+                height:28px;
+            }
+
+            .active, .collapsible:hover {
+                background-color: #555;
+            }
+
+            .contenta {
+                margin:20px;
+                padding: 0 18px;
+                display: none;
+                overflow: hidden;
+            }
+        </style>
+        <h4>¿No quieres pagar con tu tarjeta predefinida?</h4>
+        <button type="button" class="collapsible">Usar otra</button>
+        <div class="contenta" style="width: 95%">
+        <H4>Ingresa los datos de la tarjeta con la que pagarás</H4>
+        <input id="numTarjeta" type="text" class="campoTexto" name="numTarjeta" placeholder="Ingrese su número de tarjeta">
+        <input id="claveTarjeta" type="password" class="campoTexto" name="claveTarjeta" placeholder="Ingrese la clave de su tarjeta">
+        <input id="vencimientoTarjeta" type="text" class="campoTexto" name="vencimientoTarjeta" onfocus="(this.type='date')" placeholder="Ingrese la fecha de vencimiento">
+        <input id="nombreTarjeta" type="text" class="campoTexto" name="nombreTarjeta" placeholder="Ingrese su nombre y apellido">
+        </div>
+
+        <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var contenta = this.nextElementSibling;
+            if (contenta.style.display === "block") {
+                contenta.style.display = "none";
+            } else {
+                contenta.style.display = "block";
+            }
+        });
+        }
+        </script>
+        <br>
+        <br>
+        <!-- SUBMIT -->
+        <input type="submit" class="modificar" value="Comprar">
+    </form>
+	<script type="text/javascript" src="scripts/script-comprarViaje.js"></script>
 </body>
 </html>

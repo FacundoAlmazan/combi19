@@ -15,7 +15,7 @@
 	}
 	if (!isset($str)){
 		$str="NULL";
-	}
+    }
 	$consulta= "SELECT * from rutas where id='$ruta'";
 	$resultado= consultar($consulta);
 	foreach ($resultado as $resultado){

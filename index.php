@@ -2,13 +2,13 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <title> Iniciar sesion </title>
+    <title> Iniciar sesión </title>
     <link rel="stylesheet" href="estilo-login.css"> <!-- CAMBIO: Adaptar link a CSS -->
   </head>
   <body>
     <div class="login-box">
       <img src="img/avatar.png" class="avatar" alt="Imagen Avatar"> <!-- CAMBIO: Adaptar imagen -->
-      <h1> Iniciar sesion </h1>
+      <h1> Iniciar sesión </h1>
       <form  method="POST" name="registro" onsubmit="return checkLogin()" <?php // es la funcion js// ?>action="db-ValidarLogin.php" <?php // esto es php// ?>>
         <!-- ENTRADA DE NOMBRE DE USUARIO -->
         <input id="user" type="text" class="campoTexto" name="username" placeholder="Ingrese nombre de usuario">

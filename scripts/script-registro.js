@@ -239,7 +239,7 @@ function validarTamaño(String){
 }
 
 function validarTamaño3(String){
-	if(String.length >= 3){
+	if(String.length == 3){
 	  return true;
 	}
 	else{

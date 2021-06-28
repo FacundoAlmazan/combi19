@@ -14,6 +14,9 @@ window.onload = function(){
     if(window.location.hash == "#errorCombId"){
         alert("Error: La identificacion se encuentra en uso");
     }
+    if (window.location.hash == "#errorCombPatente"){
+        alert("La patente se encuentra en uso");
+    }
     if(window.location.hash == "#InsumoOcu"){
         alert("Error: El insumo forma parte de un viaje, no se puede modificar");
     }
