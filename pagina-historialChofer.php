@@ -91,13 +91,6 @@
                                     if($estado=='2'){
                                         echo '<br>';
                                         echo"<nbsp >ESTADO:</nbsp>";echo "<nbsp style='color:green'>En curso</nbsp>";
-                                        echo'<br>';
-                                        echo '</br>';
-                                        echo '<a class="canViaje" onclick="checkCancelar(); return confirm(';
-                                        echo "'¿Seguro que quieres cancelar el viaje?')";
-                                        echo '" href="db-cancelar.php?idViaje=';
-                                        echo $idViaje;
-                                        echo'">  Cancelar viaje</a>';
                                         echo '<br></br>';
                                         echo '<a class="canViaje" onclick="checkCancelar(); return confirm(';
                                         echo "'¿Llegaste a destino?')";

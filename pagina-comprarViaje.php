@@ -83,7 +83,11 @@
                     overflow: hidden;
                 }
             </style>
-            <h4>¿No quieres pagar con tu tarjeta predefinida?</h4>
+            <?php $consulta2="SELECT * from usuarios where id='$_SESSION[id]'";
+            $resultado2=consultar($consulta2);
+            $resul=mysqli_fetch_assoc($resultado2);
+            ?>
+            <h4>¿No quieres pagar con tu tarjeta predefinida <?php echo '('; echo"$resul[tarjeta]";echo ") ?";?> </h4>
             <button type="button" class="collapsible">Usar otra</button>
             <div class="contenta" style="width: 95%">
             <H4>Ingresa los datos de la tarjeta con la que pagarás</H4>

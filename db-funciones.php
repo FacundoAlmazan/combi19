@@ -9,11 +9,11 @@
 	// Funciones login
 
 	// Funciones Registro
-	function EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento,$gold){
+	function EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento,$gold,$tarjeta){
 		$validacion="SELECT * from usuarios where nombreusuario=$user";
 		$resultadoValidacion=consultar($validacion);
     	if ($resultadoValidacion== null){
-			$consulta="INSERT into usuarios(nombre,apellido,nombreusuario,email,dni,clave,nacimiento,tipo,gold) VALUES ('$nombre','$apellido','$user','$email','$dni','$pass','$nacimiento','1','$gold')";
+			$consulta="INSERT into usuarios(nombre,apellido,nombreusuario,email,dni,clave,nacimiento,tipo,gold,tarjeta) VALUES ('$nombre','$apellido','$user','$email','$dni','$pass','$nacimiento','1','$gold','$tarjeta')";
 	    	$resultado=consultar($consulta);
 			if($resultado){
 				echo '<script language="javascript">alert("Se ha registrado exitosamente");</script>';

@@ -9,6 +9,7 @@
     $numTarjeta = $_POST['numTarjeta'];
     $claveTarjeta = $_POST['claveTarjeta'];
     $nombreTarjeta = $_POST['nombreTarjeta'];
+    $dniValidacion= 1;
     $gold = 0;
     $nombreValidacion="ASDASKDALhasjdhasjkdasjd";
     $emailValidacion="ASDASKDALhasjdhasjkdasjd";
@@ -82,7 +83,10 @@
                 if(!empty($numTarjeta) && !empty($claveTarjeta) && !empty($nombreTarjeta)){
                     $gold=1;
                 }
-                EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento,$gold);
+                if(empty($numTarjeta)){
+                    $numTarjeta="a";
+                }
+                EnviarRegistro($nombre,$apellido,$user,$email,$dni,$pass,$nacimiento,$gold,$numTarjeta);
             }
         }
     }
