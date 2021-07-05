@@ -48,6 +48,13 @@
 		</div>
 		<div class="bloque">
 			<h1 class="titulo"> Listados de reportes </h1>
+			<div class="row">
+			  <div class="column">
+			  <a class="item" href="pagina-usuariosRechazados.php">
+						<p class="item">USUARIOS RECHAZADOS</p>
+					</a>
+			  </div>
+			</div>
 		</div>
 	</div>
 	<script src="scripts/script-homeAdmin.js"></script> 

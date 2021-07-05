@@ -72,7 +72,7 @@
                                     echo "<p> PRECIO:$precio </p>";
                                     $ocupados=$asientos - $disp;
                                     echo "ASIENTOS OCUPADOS:$ocupados"; echo "/"; echo $asientos;
-                                    echo "<br>";
+                                    echo "<br></br>";
                                     if($estado=='1'){
                                         echo '<br>';
                                         echo"<nbsp >ESTADO:</nbsp>";echo "<nbsp style='color:yellow'>Pendiente</nbsp>";
@@ -110,6 +110,12 @@
                                         echo'<br>';
                                         echo '</br>';
                                     }  
+                                    echo'<br></br> <button style="font-size:22px; background-color: #4CAF50; border-radius:10px;" onclick="window.location.href=';
+                                    echo "'";
+                                    echo 'pagina-listarPasajeros.php?id=';
+                                    echo $idViaje;
+                                    echo "'";     
+                                    echo'">PASAJEROS</button>';
                                 echo '</div>';
                                 echo "<br> </br>";
                             }

@@ -9,7 +9,7 @@
 <head>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
-	<title>HOME ADMIN</title>
+	<title>HOME CHOFER</title>
 		<link rel="stylesheet" type="text/css" href="estilo-homeAdmin.css">
 </head>
 <body>
