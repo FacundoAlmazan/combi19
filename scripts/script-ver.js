@@ -23,4 +23,7 @@ window.onload = function(){
     if (window.location.hash == "#InsumoNombre"){
         alert("Error: El nombre del insumo ya se encuentra en uso");
     }
+    if (window.location.hash == "#errorTiempos"){
+        alert("El viaje no se agrego porque el chofer ya realiza un viaje ese día");
+    }
 }

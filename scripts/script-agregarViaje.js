@@ -72,7 +72,7 @@ window.onload = function(){
     if (window.location.hash == "#agregado"){
         alert("El viaje se ha agregado con exito");
     }
-    if (window.location.hash == "#error"){
-        alert("");
+    if (window.location.hash == "#errorTiempos"){
+        alert("El viaje no se agrego porque el chofer ya realiza un viaje ese día");
     }
 }

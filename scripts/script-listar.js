@@ -8,4 +8,7 @@ window.onload = function(){
     if(window.location.hash == "#errorRe"){
         alert("Error: Valores nombre y provincia repetidos con un lugar ya existentes");
     }
+    if (window.location.hash == "#errorTiempos"){
+        alert("El viaje no se agrego porque el chofer ya realiza un viaje ese día");
+    }
 }
