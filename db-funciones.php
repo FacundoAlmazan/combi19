@@ -1138,62 +1138,149 @@
 	}
 
     function filtrarReporte($c,$o,$d,$f1,$f2){
-		$consulta= "SELECT * from viajes where (fecha>'$f1' AND fecha<'$f2')";
-		$respuesta=consultar($consulta);
-		if($respuesta){
-			foreach ($respuesta as $respuesta){
-                echo '<a class="item">';
-                echo $respuesta['fecha'];
-                echo '</a>';
-				/*$rutId=$respuesta['idRuta'];
-				$consulta22="SELECT * from rutas where id='$rutId'";
-				$respuesta22= consultar($consulta22);
-				foreach($respuesta22 as $respuesta22){
-					$origen=$respuesta22['origen'];
-					$destino=$respuesta22['destino'];
-				}
-				if($origen== $o && $destino==$d){
-			   	echo '<a class="item"';
-				echo' href="pagina-comprarViaje.php?idViaje=';
-			   	echo $respuesta['id'];
-			   	echo '">'; 
-				echo' <div class="column">
-					<p>RUTA : ';
-					$idR=$respuesta['idRuta'];
-					$consulta1= "SELECT * from rutas where id='$idR'";
-					$ans=consultar($consulta1);
-					foreach($ans as $ans){
-						echo $ans['origen']. " ---> " . $ans['destino'];
-					}
-					echo " PRECIO:";
-					if(!isset($_SESSION)){
-						session_start();
-					 }
-					 if($_SESSION['gold']==1){
-						 echo '<strike>';
-						 echo $respuesta['precio'];
-						 echo '</strike>';
-						 echo '->';
-						 $precio=$respuesta['precio'];
-						 $descuento= $precio*0.1;
-						 $precio= $precio-$descuento;
-						 echo $precio;
-					 }
-					 else{
-					 echo'<p>';
-					 echo $respuesta['precio'];
-					 echo '</p>';}
-					echo " FECHA:";
-					echo $respuesta['fecha'];
-					echo" HORA:";
-					echo $respuesta['hora'];
-					echo " ASIENTOS DISPONIBLES:";
-                     echo $respuesta['asientosDisp'];
-				echo "</p></div></a>";
-					 }
-                */
-		   	}
-		}
-
+        if($f1 != 'X' && $f2 != 'X'){
+            $consulta1= "SELECT * FROM viajes WHERE (fecha>='$f1' AND fecha<='$f2')";
+            $respuesta1=consultar($consulta1);
+            if(mysqli_num_rows($respuesta1) != 0){
+                foreach ($respuesta1 as $respuesta1){
+                    $boo=true;
+                    $str = "Fecha:'".$respuesta1['fecha'];
+				    $rutId=$respuesta1['idRuta'];
+                    $consulta2="SELECT * FROM rutas WHERE id='$rutId'";
+                    $respuesta2= consultar($consulta2);
+                    if(mysqli_num_rows($respuesta2) != 0){
+                        foreach($respuesta2 as $respuesta2){
+                            $origen=$respuesta2['origen'];
+                            $destino=$respuesta2['destino'];
+                            if(($o != 'X') && ($d != 'X')){                     //SI ESTAN SETEADOS EL ORIGEN Y DESTINO BUSCO VIAJES CON ESE ORIGEN Y DESTINO 
+                                if($origen== $o && $destino==$d){  
+                                    $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                }
+                                else{
+                                    $boo=false;
+                                }
+                            }
+                            else{
+                                if($o != 'X' && $d == 'X'){              //SI SOLO ESTA SETEADO EL ORIGEN BUSCO VIAJES CON ESE ORIGEN Y CUALQUIER DESTINO
+                                    if($origen== $o){
+                                        $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                    }
+                                    else{
+                                        $boo=false;
+                                    }
+                                }
+                                else{
+                                    if($o == 'X' && $d != 'X'){         //SI SOLO ESTA SETEADO EL DESTINO BUSCO VIAJES CON ESE DESTINO Y CUALQUIER ORIGEN
+                                        if($destino== $d){
+                                            $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                        } 
+                                        else{
+                                            $boo=false;
+                                        }
+                                    }
+                                    else{
+                                        if(($o == 'X' && $o == 'X')){   //SI NO ESTA SETEADO EL ORIGEN NI EL DESTINO BUSCO CUALQUIER VIAJE
+                                            $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                        }
+                                        else{
+                                            $boo=false;
+                                        }
+                                    }
+                                }
+                            }
+                            $combiId=$respuesta2['combi'];
+                            $consulta3= "SELECT * FROM combis WHERE (identificacion = '$combiId')";
+                            $respuesta3= consultar($consulta3);
+                            if(mysqli_num_rows($respuesta3) != 0){
+                                foreach($respuesta3 as $respuesta3){
+                                    $chofer=$respuesta3['chofer'];
+                                    if($c != 'X'){
+                                        if($chofer != $c){
+                                            $boo=false;
+                                        }
+                                    } 
+                                    $str = $str. " Chofer:'$chofer'";
+                                }
+                            }
+                        }
+                    }
+                    if($boo){
+                        echo "<a class='item'><p style='font-size:18px'>$str</p></a>";
+                    }
+		        }
+            }
+        }
+        else{
+            $consulta1= "SELECT * FROM viajes";
+            $respuesta1=consultar($consulta1);
+            if(mysqli_num_rows($respuesta1) != 0){
+                foreach ($respuesta1 as $respuesta1){
+                    $boo=true;
+                    $str = "Fecha:'".$respuesta1['fecha'];
+				    $rutId=$respuesta1['idRuta'];
+                    $consulta2="SELECT * FROM rutas WHERE id='$rutId'";
+                    $respuesta2= consultar($consulta2);
+                    if(mysqli_num_rows($respuesta2) != 0){
+                        foreach($respuesta2 as $respuesta2){
+                            $origen=$respuesta2['origen'];
+                            $destino=$respuesta2['destino'];
+                            if(($o != 'X') && ($d != 'X')){                     //SI ESTAN SETEADOS EL ORIGEN Y DESTINO BUSCO VIAJES CON ESE ORIGEN Y DESTINO 
+                                if($origen== $o && $destino==$d){  
+                                    $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                }
+                                else{
+                                    $boo=false;
+                                }
+                            }
+                            else{
+                                if($o != 'X' && $d == 'X'){              //SI SOLO ESTA SETEADO EL ORIGEN BUSCO VIAJES CON ESE ORIGEN Y CUALQUIER DESTINO
+                                    if($origen== $o){
+                                        $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                    }
+                                    else{
+                                        $boo=false;
+                                    }
+                                }
+                                else{
+                                    if($o == 'X' && $d != 'X'){         //SI SOLO ESTA SETEADO EL DESTINO BUSCO VIAJES CON ESE DESTINO Y CUALQUIER ORIGEN
+                                        if($destino== $d){
+                                            $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                        } 
+                                        else{
+                                            $boo=false;
+                                        }
+                                    }
+                                    else{
+                                        if(($o == 'X' && $o == 'X')){   //SI NO ESTA SETEADO EL ORIGEN NI EL DESTINO BUSCO CUALQUIER VIAJE
+                                            $str = $str. "' Origen:'$origen' Destino:'$destino'";
+                                        }
+                                        else{
+                                            $boo=false;
+                                        }
+                                    }
+                                }
+                            }
+                            $combiId=$respuesta2['combi'];
+                            $consulta3= "SELECT * FROM combis WHERE (identificacion = '$combiId')";
+                            $respuesta3= consultar($consulta3);
+                            if(mysqli_num_rows($respuesta3) != 0){
+                                foreach($respuesta3 as $respuesta3){
+                                    $chofer=$respuesta3['chofer'];
+                                    if($c != 'X'){
+                                        if($chofer != $c){
+                                            $boo=false;
+                                        }
+                                    } 
+                                    $str = $str. " Chofer:'$chofer'";
+                                }
+                            }
+                        }
+                    }
+                    if($boo){
+                        echo "<a class='item'><p style='font-size:18px'>$str</p></a>";
+                    }
+		        }
+            }
+        }
 	}
 ?>

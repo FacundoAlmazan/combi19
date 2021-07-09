@@ -33,16 +33,18 @@ $(document).ready(function(){
 			<form name="buscar" method="POST" action="db-filtrarReporteViajes.php">
             <span style="color:white">Chofer:</span>
             <select id="chofer" type="text" class="campoTexto" name="chofer" placeholder="Chofer">
+            <option value="X" selected >-</option>
 			<?php $consulta="SELECT * from usuarios WHERE tipo=2";
 			    $datos=consultar($consulta); 
                 foreach($datos as $datos){
                     ?>
-                    <option value=<?php echo'"'; echo $datos['id']; echo '">';
+                    <option value=<?php echo'"'; echo $datos['nombreusuario']; echo '">';
                     echo $datos['nombre']; echo","; echo $datos['apellido'];  ?> </option>
                     <?php } ?>
                 </select>
             <span style="color:white">Origen:</span>
 			<select id="origen" type="text" class="campoTexto" name="origen" placeholder="Origen">
+            <option value="X" selected >-</option>
 			<?php $consulta="SELECT * from lugares";
 			    $datos=consultar($consulta); ?>
 				     <?php foreach($datos as $datos){ ?>
@@ -52,6 +54,7 @@ $(document).ready(function(){
 					</select>
             <span style="color:white">Destino:</span>
 			<select id="destino" type="text" class="campoTexto" name="destino" placeholder="Destino">
+            <option value="X" selected >-</option>
 			<?php $consulta="SELECT * from lugares";
 			    $datos=consultar($consulta); ?>
 				     <?php foreach($datos as $datos){ ?>
@@ -62,9 +65,9 @@ $(document).ready(function(){
             <br>
             <br>
 			<span style="color:white">Rango de fechas:</span>
-            <input id="fecha1" onfocus="(this.type='date')" type="text" class="campoTexto" value="<?php if(isset($_GET['f1'])){echo $_GET["f1"];}else{echo 'dd /  mm / aaaa';}?>" name="fecha1">
+            <input id="fecha1" class="campoTexto" type="date" <?php if(isset($_GET['f1'])){echo 'value="'; echo $_GET['f1']; echo'"';}?>" name="fecha1">
             <span style="color:white">-</span>
-			<input id="fecha2" onfocus="(this.type='date')" type="text" class="campoTexto" value="<?php if(isset($_GET['f2'])){echo $_GET["f2"];}else{echo 'dd / mm / aaaa';}?>" name="fecha2">
+			<input id="fecha2" class="campoTexto" type="date" <?php if(isset($_GET['f2'])){echo 'value="'; echo $_GET['f2']; echo'"';}?>" name="fecha2">
             <br>
             <br>
 			<input type="submit" value="Buscar&#x1F50D;">
@@ -72,27 +75,25 @@ $(document).ready(function(){
             <br>
 			</form>
 <?php
-        if(empty($_GET['c']) && empty($_GET['o']) && empty($_GET['d']) && empty($_GET['f1']) && empty($_GET['f2'])){
+        if(empty($_GET['c'])){$c='X';}else{$c=$_GET['c'];}
+        if(empty($_GET['o'])){$o='X';}else{$o=$_GET['o'];}
+        if(empty($_GET['d'])){$d='X';}else{$d=$_GET['d'];}
+        if(empty($_GET['f1'])){$f1='X';}else{$f1=$_GET['f1'];}
+        if(empty($_GET['f2'])){$f2='X';}else{$f2=$_GET['f2'];}
+        if(($c=='X') && ($o=='X') && ($d=='X') && ($f1=='X') && ($f2=='X')){
             echo '<h3 style="color:white">Seleccione filtros para generar el reporte</h3>';
         }
         else{
-            if(isset($_GET['o']) && isset($_GET['d'])){
-                if ($_GET['o'] == $_GET['d']){
+            if(($o!='X') && ($d!='X')){
+                if ($o == $d){
                     echo '<h3 class="busquedaLetra">El origen y el destino no pueden ser iguales</h3>';
                 }
             }
-            if (isset($_GET['f1']) || isset($_GET['f2'])){
-                if (empty($_GET['f1']) || empty($_GET['f2'])){
-                    echo '<h3 class="busquedaLetra">Ambas fechas deben cargarse para representar un rango</h3>';
-                }
-                else{
-                    $c=$_GET['c'];
-                    $o=$_GET['o'];
-                    $d=$_GET['d'];
-                    $f1=$_GET['f1'];
-                    $f2=$_GET['f2'];
-                    filtrarReporte($c,$o,$d,$f1,$f2);
-                }
+            if ((($f1!='X') || ($f2!='X')) && (($f1=='X') || ($f2=='X'))){
+                echo '<h3 class="busquedaLetra">Ambas fechas deben cargarse para representar un rango</h3>';
+            }
+            else{
+                filtrarReporte($c,$o,$d,$f1,$f2);
             }
         }
 	 ?>
