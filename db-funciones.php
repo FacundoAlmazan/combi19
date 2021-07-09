@@ -1114,4 +1114,86 @@
 		<script type="text/javascript" src="scripts/script-agregarViaje.js"></script>
 		<?php
 	}
+
+    function listarPasajerosCovid(){
+        $datetime1 = new DateTime('2009-10-11');
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $back= date("Y-m-d",strtotime('-30 days'));
+        $consulta="SELECT * FROM usuarios WHERE fechaCovid != '0000-00-00'";
+        $respuesta=consultar($consulta);
+        if (mysqli_num_rows($respuesta) != 0){
+			foreach ($respuesta as $respuesta){
+                if($respuesta['fechaCovid']>=$back){
+                    echo '<a class="item">';
+                    echo' <div class="column">
+                        <p>usuario:';
+                        echo $respuesta['nombreusuario'];
+                    echo "</p></div></a>";
+                }
+		   	}
+		}
+        else{
+            echo'No hubieron usuarios rechazados por covid en los ultimos 30 días';
+        }
+	}
+
+    function filtrarReporte($c,$o,$d,$f1,$f2){
+		$consulta= "SELECT * from viajes where (fecha>'$f1' AND fecha<'$f2')";
+		$respuesta=consultar($consulta);
+		if($respuesta){
+			foreach ($respuesta as $respuesta){
+                echo '<a class="item">';
+                echo $respuesta['fecha'];
+                echo '</a>';
+				/*$rutId=$respuesta['idRuta'];
+				$consulta22="SELECT * from rutas where id='$rutId'";
+				$respuesta22= consultar($consulta22);
+				foreach($respuesta22 as $respuesta22){
+					$origen=$respuesta22['origen'];
+					$destino=$respuesta22['destino'];
+				}
+				if($origen== $o && $destino==$d){
+			   	echo '<a class="item"';
+				echo' href="pagina-comprarViaje.php?idViaje=';
+			   	echo $respuesta['id'];
+			   	echo '">'; 
+				echo' <div class="column">
+					<p>RUTA : ';
+					$idR=$respuesta['idRuta'];
+					$consulta1= "SELECT * from rutas where id='$idR'";
+					$ans=consultar($consulta1);
+					foreach($ans as $ans){
+						echo $ans['origen']. " ---> " . $ans['destino'];
+					}
+					echo " PRECIO:";
+					if(!isset($_SESSION)){
+						session_start();
+					 }
+					 if($_SESSION['gold']==1){
+						 echo '<strike>';
+						 echo $respuesta['precio'];
+						 echo '</strike>';
+						 echo '->';
+						 $precio=$respuesta['precio'];
+						 $descuento= $precio*0.1;
+						 $precio= $precio-$descuento;
+						 echo $precio;
+					 }
+					 else{
+					 echo'<p>';
+					 echo $respuesta['precio'];
+					 echo '</p>';}
+					echo " FECHA:";
+					echo $respuesta['fecha'];
+					echo" HORA:";
+					echo $respuesta['hora'];
+					echo " ASIENTOS DISPONIBLES:";
+                     echo $respuesta['asientosDisp'];
+				echo "</p></div></a>";
+					 }
+                */
+		   	}
+		}
+
+	}
 ?>
