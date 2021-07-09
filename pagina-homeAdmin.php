@@ -54,6 +54,11 @@
 						<p class="item">USUARIOS RECHAZADOS</p>
 					</a>
 			  </div>
+              <div class="column">
+			  <a class="item" href="pagina-reporteViajes.php">
+						<p class="item">VIAJES REALIZADOS</p>
+					</a>
+			  </div>
 			</div>
 		</div>
 	</div>
