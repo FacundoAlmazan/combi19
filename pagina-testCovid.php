@@ -4,7 +4,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<?php 
 	   $idViaje=$_GET['idViaje'];
-	   $idUsuario=$_GET['idUsuario'];
+	   if(isset($_GET['idUsuario'])){
+	          $idUsuario=$_GET['idUsuario'];}
+	   else{
+		   $idUsuario=420420;
+	   }
 	   $idPasaje=$_GET['idPasaje']; 
 	?>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">

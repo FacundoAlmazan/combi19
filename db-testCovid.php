@@ -36,10 +36,10 @@
 	if($estado != 1){
 		$consultaPasaje="UPDATE pasajes SET estado='2' where id='$idPasaje'";
 		$resultPasaje=consultar($consultaPasaje);
-
+        if($idUsuario != 420420){
 		$consultaUsuario="UPDATE usuarios SET covid='1' ,fechaCovid='$fecha' where id='$idUsuario'";
 		$resultUsuario=consultar($consultaUsuario);
-
+		}
 		$consultaViaje="SELECT * from viajes where id='$idViaje'";
 		$resultViaje=consultar($consultaViaje);
 		foreach($resultViaje as $resultViaje){

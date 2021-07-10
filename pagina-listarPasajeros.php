@@ -35,12 +35,59 @@
                 echo $disponibles; echo "/"; echo $totales;
                 echo "</h2>";
                 if($disponibles>0){
-                echo '<button style="background-color:#7FFF00; color:black; font-weight:bold;  border-radius:5px; font-size:26px;">Vender pasaje</button>';}
+                echo '
+                    <button  style="background-color:#7FFF00; color:black; font-weight:bold;  border-radius:5px; font-size:26px;"
+                      onclick="window.location.href=';
+                                   echo "'";
+                                   echo 'pagina-venderPasaje.php?idViaje=';
+                                   echo $idViaje;
+                                   echo "'";     
+                                   echo'">Vender pasaje</button>';
+               }
                 $consulta="SELECT * from pasajes where idViaje=$idViaje";
                 $resultado=consultar($consulta);
                 foreach ($resultado as $resultado){
                     echo '<a class="item">';
-                    $idUser=$resultado['id'];
+                    if(!($resultado['idUsuario'] > 0)){
+                         echo "<p>Nombre: "; echo $resultado['mailPresencial'];echo"<p><p>";
+                         echo " (Sin usuario, pasaje vendido de manera PRESENCIAL"; echo "</p>";
+                        if($resultado['estado']==3){ //Si el pasajero fue marcado como ausente
+                            echo '<p style="color:red;font-weight:bold;">EL PASAJERO NO SE PRESENTO</p>';
+                        }
+                        else{ //Si fue testeado y paso la prueba
+                            if($resultado['estado']==1){
+                                echo'<p style="color:green;">EL PASAJERO FUE TESTEADO Y PASO LA PRUEBA&#9989;</p>';
+                            }
+                            else{
+                                if($resultado['estado']==2){//Si fue testeado y no paso la prueba
+                                    echo'<p style="color:red; font-weight:bold;">EL PASAJERO FUE TESTEADO Y NO PASO LA PRUEBA &#10060;</p>';
+                                }
+                                else{ //SI TODAVIA NO FUE TESTEADO
+                                   echo '<button style="font-weight:bold; font-size:18px; background-color: #87CEFA;" onclick="window.location.href=';
+                                   echo "'";
+                                   echo 'pagina-testCovid.php?idViaje=';
+                                   echo $idViaje;
+                                   echo "&idPasaje=";
+                                   echo $resultado['id'];
+                                   echo "'";     
+                                   echo'">TESTEAR COVID</button>';
+                                   echo "&nbsp";
+                                   echo '<button style="font-weight:bold; font-size:18px; background-color: #F08080;" onclick="window.location.href=';
+                                   echo "'";
+                                   echo 'db-ausencia.php?idViaje=';
+                                   echo $idViaje;
+                                   echo "&idPasaje=";
+                                   echo $resultado['id'];
+                                   echo "'";
+                                   echo'">NO SE PRESENTO</button>';
+                                }
+                            }
+                        }
+                    }
+                    else{
+                   
+                    
+                    $idUser=$resultado['idUsuario'];
                     $consultaUsuario="SELECT * from usuarios where id=$idUser";
                     $datosUsuario= consultar($consultaUsuario);
                     if(!empty($datosUsuario)){
@@ -83,6 +130,7 @@
                             }
                         }
                     }
+                }
                     echo '</a>';
                 }
                 }
