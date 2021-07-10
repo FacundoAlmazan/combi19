@@ -36,13 +36,18 @@
 	     	$resultadoRuta=consultar($consultaRuta);
 	        	foreach($resultadoRuta as $resultadoRuta){       //Para cada ruta (Deberia ser 1 sola)
                     $combi= $resultadoRuta['combi'];
+					if($combi == $combiId) { // Preguntamos si el chofer de la combi es el mismo que quiere hacer el viaje actual
+						$bool=2;
+					 }
+					 else{
                     $consultaCombi= "SELECT * from combis where identificacion='$combi'"; //Tomamos la combi de la ruta, para ver su chofer
 		            $resultadoCombi=consultar($consultaCombi);
 		            foreach($resultadoCombi as $resultadoCombi){
-		             	if($resultadoCombi['chofer'] == $chofer){ // Preguntamos si el chofer de la combi es el mismo que quiere hacer el viaje actual
+		             	if($resultadoCombi['chofer'] == $chofer) { // Preguntamos si el chofer de la combi es el mismo que quiere hacer el viaje actual
 							$bool=1;
 			             }
 		            }
+				}
 				}
      	}
 	}
@@ -51,6 +56,11 @@
 	   header("location: pagina-agregar.php?tipo=5#agregado");
 	}
 	else{
+		if($bool== 2){
+			header("location: pagina-agregar.php?tipo=5#errorTiemposC");
+		}
+		else{
 		header("location: pagina-agregar.php?tipo=5#errorTiempos");
+		}
 	}
 ?>

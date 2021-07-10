@@ -11,9 +11,6 @@
 	if($_POST['temperatura']>37){
 		$estado=2;
 	}
-	   elseif(!isset($_POST['negativo'])){
-		 $estado=3;
-	    }
 
     if(isset($_POST['gusto'])){
 		$cantSintomas++;

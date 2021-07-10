@@ -31,8 +31,6 @@
 		<form name="test" method="POST" action="db-testCovid.php?idViaje=<?php echo$idViaje;echo"&idUsuario=";echo$idUsuario;echo"&idPasaje=";echo $idPasaje;?>">
 		   <h2>TEMPERATURA(°C)</h2>
 		      <input id="temperatura" type="number" class="campoTexto" name="temperatura">
-			<h2>PRESENTO TEST DE COVID NEGATIVO</h2>
-			<input type="checkbox" id="negativo" name="negativo" value="negativo"> 	
 		   <h2>Sintomas que posee:</h2>
 		   <h3>Perdida de gusto</h3>
 		      <input  id="gusto" type="checkbox" name="gusto" value="gusto">

@@ -26,4 +26,7 @@ window.onload = function(){
     if (window.location.hash == "#errorTiempos"){
         alert("El viaje no se agrego porque el chofer ya realiza un viaje ese día");
     }
+    if (window.location.hash == "#errorTiemposC"){
+        alert("El viaje no se agrego porque la combi ya realiza un viaje ese día");
+    }
 }

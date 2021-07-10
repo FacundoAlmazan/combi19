@@ -86,8 +86,12 @@
             <?php $consulta2="SELECT * from usuarios where id='$_SESSION[id]'";
             $resultado2=consultar($consulta2);
             $resul=mysqli_fetch_assoc($resultado2);
+            $covid= $resul['covid'];
+            if ($resul['gold']==1 and $covid != 1){
+                echo "<h4>¿No quieres pagar con tu tarjeta predefinida";  echo '('; echo"$resul[tarjeta]";echo ") ?"; 
+            
             ?>
-            <h4>¿No quieres pagar con tu tarjeta predefinida <?php echo '('; echo"$resul[tarjeta]";echo ") ?";?> </h4>
+            
             <button type="button" class="collapsible">Usar otra</button>
             <div class="contenta" style="width: 95%">
             <H4>Ingresa los datos de la tarjeta con la que pagarás</H4>
@@ -95,7 +99,7 @@
             <input id="claveTarjeta" type="password" class="campoTexto" name="claveTarjeta" placeholder="Ingrese la clave de su tarjeta">
             <input id="vencimientoTarjeta" type="text" class="campoTexto" name="vencimientoTarjeta" onfocus="(this.type='date')" placeholder="Ingrese la fecha de vencimiento">
             <input id="nombreTarjeta" type="text" class="campoTexto" name="nombreTarjeta" placeholder="Ingrese su nombre y apellido">
-            </div>
+            </div> <?php } ?>
 
             <script>
             var coll = document.getElementsByClassName("collapsible");
@@ -115,8 +119,14 @@
             </script>
             <br>
             <br>
-            <!-- SUBMIT -->
-            <input type="submit" class="modificar" value="Comprar">
+            <!-- SUBMIT --><?php if($covid == 1){
+                echo '<h3 style="color:red;">No puedes comprar viajes porque fuiste rechazado por sospecha de Covid el día '; echo $resul['fechaCovid'];echo '</h3>';
+         
+            }
+            else{
+                echo '<input type="submit" class="modificar" value="Comprar">';
+            }
+            ?>
         </form>
     <?php
     }

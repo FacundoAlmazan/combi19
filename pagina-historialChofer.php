@@ -70,6 +70,16 @@
                                     echo"<p>FECHA: $fecha</p>";
                                     echo"<p>HORA: $hora</p>";
                                     echo "<p> PRECIO:$precio </p>";
+                                    $consultaViajeEstado= "SELECT * from pasajes where idViaje='$idViaje'";
+                                    $resultViajeEstado= consultar($consultaViajeEstado);
+                                    $comprobador=1;
+                                    if(!empty($resultViajeEstado)){
+                                        foreach($resultViajeEstado as $resultViajeEstado){
+                                        if($resultViajeEstado['estado'] == 0){
+                                            $comprobador=0;
+                                        }
+                                    }
+                                }
                                     $ocupados=$asientos - $disp;
                                     echo "ASIENTOS OCUPADOS:$ocupados"; echo "/"; echo $asientos;
                                     echo "<br></br>";
@@ -83,10 +93,15 @@
                                         echo $idViaje;
                                         echo'">  Cancelar viaje</a>';
                                         echo '<br></br>';
+                                        if($comprobador==0){
+                                            echo '<a style="color:grey; text-decoration: none;" onclick="checkCancelar();"';
+                                            echo'">Empezar viaje(No disponible hasta que no se testeen todos los pasajeros)</a>'; 
+                                        }
+                                        else{
                                         echo '<a style="color:green; text-decoration: none;" onclick="checkCancelar();"';
                                         echo ' href="db-empezarViaje.php?idViaje=';
                                         echo $idViaje;
-                                        echo'">Empezar viaje</a>';
+                                        echo'">Empezar viaje</a>';}
                                     }    
                                     if($estado=='2'){
                                         echo '<br>';
