@@ -242,7 +242,7 @@
 		$consulta= "SELECT * from viajes where (estado='1' and asientosDisp>0 and fecha='$f')";
 		$respuesta=consultar($consulta);
 		$rest= $respuesta;
-		if($respuesta){
+		if(!empty($respuesta)){
 			foreach ($respuesta as $respuesta){
 				$rutId=$respuesta['idRuta'];
 				$consulta22="SELECT * from rutas where id='$rutId'";
@@ -290,7 +290,13 @@
                      echo $respuesta['asientosDisp'];
 				echo "</p></div></a>";
 					 }
+					 else{
+						echo'<h4 style="color:white"> No se encontraron resultados para su busqueda  </h4>';
+					 }
 		   	}
+		}
+		else{
+			echo "<h3> No se encontraron resultados para su busqueda </h3>";
 		}
 
 	}
@@ -1133,7 +1139,7 @@
 		   	}
 		}
         else{
-            echo'No hubieron usuarios rechazados por covid en los ultimos 30 días';
+            echo'<h3 style="color:white;">No hubieron usuarios rechazados por covid en los ultimos 30 días</h3>';
         }
 	}
 

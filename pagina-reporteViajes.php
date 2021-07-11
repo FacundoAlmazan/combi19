@@ -96,6 +96,7 @@ $(document).ready(function(){
                 filtrarReporte($c,$o,$d,$f1,$f2);
             }
         }
+
 	 ?>
 			</div>
 	</div>

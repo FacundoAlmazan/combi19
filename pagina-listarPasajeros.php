@@ -46,6 +46,11 @@
                }
                 $consulta="SELECT * from pasajes where idViaje=$idViaje";
                 $resultado=consultar($consulta);
+                if(mysqli_num_rows($resultado) == 0){
+                        echo'<h2 style="color:white"> No hay pasajeros </h2>';
+                    
+                }
+                if(!empty($resultado)){
                 foreach ($resultado as $resultado){
                     echo '<a class="item">';
                     if(!($resultado['idUsuario'] > 0)){
@@ -85,8 +90,6 @@
                         }
                     }
                     else{
-                   
-                    
                     $idUser=$resultado['idUsuario'];
                     $consultaUsuario="SELECT * from usuarios where id=$idUser";
                     $datosUsuario= consultar($consultaUsuario);
@@ -95,6 +98,10 @@
                         echo "<p>Nombre: ";
                         echo $datosUsuario['nombre']; echo " "; echo $datosUsuario['apellido'];
                         echo " | Email: "; echo $datosUsuario['email']; echo "| Dni: "; echo $datosUsuario['dni']; echo"</p>";
+                        if($resultado['cancelo']==1){
+                            echo '<p style="color:red;font-weight:bold;">EL PASAJERO CANCELO EL VIAJE</p>';
+                        }
+                        else{
                         if($resultado['estado']==3){ //Si el pasajero fue marcado como ausente
                             echo '<p style="color:red;font-weight:bold;">EL PASAJERO NO SE PRESENTO</p>';
                         }
@@ -130,10 +137,16 @@
                             }
                         }
                     }
+                    }
+                
                 }
                     echo '</a>';
                 }
                 }
+            }
+            else{
+                echo'<h4 style="color:white;"> No hay pasajeros </h4>';
+            }
           ?>
 		</div>
 	</div>
