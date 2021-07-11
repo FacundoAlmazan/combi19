@@ -67,5 +67,21 @@ class autenticacion {
             <?php
         } 
     }
+
+    function validar_baneo(){
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $back= date("Y-m-d",strtotime('-15 days'));
+        $id=$_SESSION['id'];
+        $consulta="SELECT * FROM usuarios WHERE id=$id";
+        $respuesta=consultar($consulta);
+        if (mysqli_num_rows($respuesta) != 0){            
+			foreach ($respuesta as $respuesta){
+                if($respuesta['fechaCovid']<$back){
+                    $consulta ="UPDATE usuarios SET covid= 0  WHERE (id='$id')";
+                    $respuesta=consultar($consulta);
+                }
+            }
+        }
+    }
 } 
 ?>               

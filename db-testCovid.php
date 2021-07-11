@@ -7,7 +7,7 @@
 	$cantSintomas=0;
 	$timezone="America/Argentina/Buenos_Aires";
 	date_default_timezone_set($timezone);
-	$fecha=$DateAndTime = date('Y-d-m', time());
+	$fecha=$DateAndTime = date('Y-m-d', time());
 	if($_POST['temperatura']>37){
 		$estado=2;
 	}

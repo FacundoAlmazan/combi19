@@ -3,6 +3,7 @@
 	$a = new autenticacion();
 	$a->validar_sesion();
 	$a->validar_rol(1);
+    $a->validar_baneo();
 	$_SESSION['url']=1;
 ?>
 <!DOCTYPE html>
