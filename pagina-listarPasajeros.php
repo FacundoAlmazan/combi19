@@ -6,6 +6,7 @@
 	$_SESSION['url']=3;
     $id=$_SESSION['id'];
     $idViaje=$_GET['id'];
+    $estado=$_GET['estado'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,8 +24,8 @@
 	</ul> 
 	<div class="content">
 		<div class="bloque">
-        <h1 style="color:white;"> LISTADO DE PASAJEROS </h1>
-          <?php 
+            <h1 style="color:white;"> LISTADO DE PASAJEROS </h1>
+            <?php 
                 echo '<h2 style="color:white;">Asientos disponibles:';
                 $consultaViaje= "SELECT * from viajes where id=$idViaje";
                 $resultadoViaje= consultar($consultaViaje);
@@ -43,7 +44,7 @@
                                    echo $idViaje;
                                    echo "'";     
                                    echo'">Vender pasaje</button>';
-               }
+                }
                 $consulta="SELECT * from pasajes where idViaje=$idViaje";
                 $resultado=consultar($consulta);
                 if(mysqli_num_rows($resultado) == 0){
@@ -51,105 +52,126 @@
                     
                 }
                 if(!empty($resultado)){
-                foreach ($resultado as $resultado){
-                    echo '<a class="item">';
-                    if(!($resultado['idUsuario'] > 0)){
-                         echo "<p>Nombre: "; echo $resultado['mailPresencial'];echo"<p><p>";
-                         echo " (Sin usuario, pasaje vendido de manera PRESENCIAL"; echo "</p>";
-                        if($resultado['estado']==3){ //Si el pasajero fue marcado como ausente
-                            echo '<p style="color:red;font-weight:bold;">EL PASAJERO NO SE PRESENTO</p>';
-                        }
-                        else{ //Si fue testeado y paso la prueba
-                            if($resultado['estado']==1){
-                                echo'<p style="color:green;">EL PASAJERO FUE TESTEADO Y PASO LA PRUEBA&#9989;</p>';
+                    foreach ($resultado as $resultado){
+                        echo '<a class="item">';
+                        if(!($resultado['idUsuario'] > 0)){
+                            echo "<p>Nombre: "; echo $resultado['mailPresencial'];echo"<p><p>";
+                            echo " (Sin usuario, pasaje vendido de manera PRESENCIAL"; echo "</p>";
+                            if($resultado['estado']==3){ //Si el pasajero fue marcado como ausente
+                                echo '<p style="color:red;font-weight:bold;">EL PASAJERO NO SE PRESENTO</p>';
                             }
-                            else{
-                                if($resultado['estado']==2){//Si fue testeado y no paso la prueba
-                                    echo'<p style="color:red; font-weight:bold;">EL PASAJERO FUE TESTEADO Y NO PASO LA PRUEBA &#10060;</p>';
+                            else{ //Si fue testeado y paso la prueba
+                                if($resultado['estado']==1){
+                                    echo'<p style="color:green;">EL PASAJERO FUE TESTEADO Y PASO LA PRUEBA&#9989;</p>';
                                 }
-                                else{ //SI TODAVIA NO FUE TESTEADO
-                                   echo '<button style="font-weight:bold; font-size:18px; background-color: #87CEFA;" onclick="window.location.href=';
-                                   echo "'";
-                                   echo 'pagina-testCovid.php?idViaje=';
-                                   echo $idViaje;
-                                   echo "&idPasaje=";
-                                   echo $resultado['id'];
-                                   echo "'";     
-                                   echo'">TESTEAR COVID</button>';
-                                   echo "&nbsp";
-                                   echo '<button style="font-weight:bold; font-size:18px; background-color: #F08080;" onclick="window.location.href=';
-                                   echo "'";
-                                   echo 'db-ausencia.php?idViaje=';
-                                   echo $idViaje;
-                                   echo "&idPasaje=";
-                                   echo $resultado['id'];
-                                   echo "'";
-                                   echo'">NO SE PRESENTO</button>';
+                                else{
+                                    if($resultado['estado']==2){//Si fue testeado y no paso la prueba
+                                        echo'<p style="color:red; font-weight:bold;">EL PASAJERO FUE TESTEADO Y NO PASO LA PRUEBA &#10060;</p>';
+                                    }
+                                    else{ //SI TODAVIA NO FUE TESTEADO
+                                    echo '<button style="font-weight:bold; font-size:18px; background-color: #87CEFA;" onclick="window.location.href=';
+                                    echo "'";
+                                    echo 'pagina-testCovid.php?idViaje=';
+                                    echo $idViaje;
+                                    echo "&idPasaje=";
+                                    echo $resultado['id'];
+                                    echo "'";     
+                                    echo'">TESTEAR COVID</button>';
+                                    echo "&nbsp";
+                                    echo '<button style="font-weight:bold; font-size:18px; background-color: #F08080;" onclick="window.location.href=';
+                                    echo "'";
+                                    echo 'db-ausencia.php?idViaje=';
+                                    echo $idViaje;
+                                    echo "&idPasaje=";
+                                    echo $resultado['id'];
+                                    echo "'";
+                                    echo'">NO SE PRESENTO</button>';
+                                    }
                                 }
                             }
-                        }
-                    }
-                    else{
-                    $idUser=$resultado['idUsuario'];
-                    $consultaUsuario="SELECT * from usuarios where id=$idUser";
-                    $datosUsuario= consultar($consultaUsuario);
-                    if(!empty($datosUsuario)){
-                        foreach ($datosUsuario as $datosUsuario){
-                        echo "<p>Nombre: ";
-                        echo $datosUsuario['nombre']; echo " "; echo $datosUsuario['apellido'];
-                        echo " | Email: "; echo $datosUsuario['email']; echo "| Dni: "; echo $datosUsuario['dni']; echo"</p>";
-                        if($resultado['cancelo']==1){
-                            echo '<p style="color:red;font-weight:bold;">EL PASAJERO CANCELO EL VIAJE</p>';
                         }
                         else{
-                        if($resultado['estado']==3){ //Si el pasajero fue marcado como ausente
-                            echo '<p style="color:red;font-weight:bold;">EL PASAJERO NO SE PRESENTO</p>';
-                        }
-                        else{ //Si fue testeado y paso la prueba
-                            if($resultado['estado']==1){
-                                echo'<p style="color:green;">EL PASAJERO FUE TESTEADO Y PASO LA PRUEBA&#9989;</p>';
-                            }
-                            else{
-                                if($resultado['estado']==2){//Si fue testeado y no paso la prueba
-                                    echo'<p style="color:red; font-weight:bold;">EL PASAJERO FUE TESTEADO Y NO PASO LA PRUEBA &#10060;</p>';
+                            $idUser=$resultado['idUsuario'];
+                            $consultaUsuario="SELECT * from usuarios where id=$idUser";
+                            $datosUsuario= consultar($consultaUsuario);
+                            if(!empty($datosUsuario)){
+                                foreach ($datosUsuario as $datosUsuario){
+                                    echo "<p>Nombre: ";
+                                    echo $datosUsuario['nombre']; echo " "; echo $datosUsuario['apellido'];
+                                    echo " | Email: "; echo $datosUsuario['email']; echo "| Dni: "; echo $datosUsuario['dni']; echo"</p>";
+                                    if($resultado['cancelo']==1){
+                                        echo '<p style="color:red;font-weight:bold;">EL PASAJERO CANCELO EL VIAJE</p>';
+                                    }
+                                    else{
+                                        if($resultado['estado']==3){ //Si el pasajero fue marcado como ausente
+                                            echo '<p style="color:red;font-weight:bold;">EL PASAJERO NO SE PRESENTO</p>';
+                                        }
+                                        else{ //Si fue testeado y paso la prueba
+                                            if($resultado['estado']==1){
+                                                echo'<p style="color:green;">EL PASAJERO FUE TESTEADO Y PASO LA PRUEBA&#9989;</p>';
+                                            }
+                                            else{
+                                                if($resultado['estado']==2){//Si fue testeado y no paso la prueba
+                                                    echo'<p style="color:red; font-weight:bold;">EL PASAJERO FUE TESTEADO Y NO PASO LA PRUEBA &#10060;</p>';
+                                                }
+                                                else{ //SI TODAVIA NO FUE TESTEADO
+                                                    echo '<button style="font-weight:bold; font-size:18px; background-color: #87CEFA;" onclick="window.location.href=';
+                                                    echo "'";
+                                                    echo 'pagina-testCovid.php?idViaje=';
+                                                    echo $idViaje;
+                                                    echo "&idPasaje=";
+                                                    echo $resultado['id'];
+                                                    echo "&idUsuario=";
+                                                    echo $datosUsuario['id'];
+                                                    echo "'";     
+                                                    echo'">TESTEAR COVID</button>';
+                                                    echo "&nbsp";
+                                                    echo '<button style="font-weight:bold; font-size:18px; background-color: #F08080;" onclick="window.location.href=';
+                                                    echo "'";
+                                                    echo 'db-ausencia.php?idViaje=';
+                                                    echo $idViaje;
+                                                    echo "&idPasaje=";
+                                                    echo $resultado['id'];
+                                                    echo "'";
+                                                    echo'">NO SE PRESENTO</button>';
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                                else{ //SI TODAVIA NO FUE TESTEADO
-                                   echo '<button style="font-weight:bold; font-size:18px; background-color: #87CEFA;" onclick="window.location.href=';
-                                   echo "'";
-                                   echo 'pagina-testCovid.php?idViaje=';
-                                   echo $idViaje;
-                                   echo "&idPasaje=";
-                                   echo $resultado['id'];
-                                   echo "&idUsuario=";
-                                   echo $datosUsuario['id'];
-                                   echo "'";     
-                                   echo'">TESTEAR COVID</button>';
-                                   echo "&nbsp";
-                                   echo '<button style="font-weight:bold; font-size:18px; background-color: #F08080;" onclick="window.location.href=';
-                                   echo "'";
-                                   echo 'db-ausencia.php?idViaje=';
-                                   echo $idViaje;
-                                   echo "&idPasaje=";
-                                   echo $resultado['id'];
-                                   echo "'";
-                                   echo'">NO SE PRESENTO</button>';
-                                }
                             }
+                            echo '</a>';
                         }
                     }
-                    }
-                
                 }
-                    echo '</a>';
+                else{
+                    echo'<h4 style="color:white;"> No hay pasajeros </h4>';
                 }
-                }
-            }
-            else{
-                echo'<h4 style="color:white;"> No hay pasajeros </h4>';
-            }
-          ?>
+            ?>
 		</div>
 	</div>
+    <?php
+    if($estado== 1){
+        ?>
+		<script>alert("Testeo de covid APROBADO")</script>
+        <?php
+	}
+	elseif($estado==2){
+		?>
+        <script>alert("Testeo de covid RECHAZADO | Razón: El pasajero posee una temperatura mayor a 38")</script>
+        <?php
+	}
+	elseif($estado==3){
+		?> 
+        <script>alert("Testeo de covid RECHAZADO | Razón: El pasajero debe mostrar un test de COVID negativo")</script>
+        <?php
+	}
+	elseif($estado==4){
+        ?>
+		<script>alert("Testeo de covid RECHAZADO | Razón: El pasajero posee mas de dos sintomas de lista")</script>
+        <?php
+	}
+    ?>
     <script>
         window.onload = function(){
             if (window.location.hash == "#agregado"){
@@ -157,6 +179,5 @@
             }
         }
     </script>
-} 
 </body>
 </html>

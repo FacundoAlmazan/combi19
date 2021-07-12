@@ -49,21 +49,28 @@
 	}
 
 	if($estado== 1){
-		echo '<script>alert("Testeo de covid APROBADO")</script>';
+        ?>
+		<script>alert("Testeo de covid APROBADO")</script>
+        <?php
 		$consultaPasaje="UPDATE pasajes SET estado='1' where id='$idPasaje'";
 		$resultPasaje=consultar($consultaPasaje);
 		
 	}
 	elseif($estado==2){
-		echo '<script>alert("Testeo de covid RECHAZADO | Razón: El pasajero posee una temperatura mayor a 38")</script>';
+		?>
+        <script>alert("Testeo de covid RECHAZADO | Razón: El pasajero posee una temperatura mayor a 38")</script>
+        <?php
 	}
 	elseif($estado==3){
-		echo '<script>alert("Testeo de covid RECHAZADO | Razón: El pasajero debe mostrar un test de COVID negativo")</script>';
+		?> <script>alert("Testeo de covid RECHAZADO | Razón: El pasajero debe mostrar un test de COVID negativo")
+        <?php
 	}
 	elseif($estado==4){
-		echo '<script>alert("Testeo de covid RECHAZADO | Razón: El pasajero posee mas de dos sintomas de lista")</script>';
+        ?>
+		<script>alert("Testeo de covid RECHAZADO | Razón: El pasajero posee mas de dos sintomas de lista")</script>
+        <?php
 	}
-    header("location:pagina-listarPasajeros.php?id=$idViaje");
+    header("location:pagina-listarPasajeros.php?id=$idViaje&estado=$estado");
 	/*
 	*/
 ?>
