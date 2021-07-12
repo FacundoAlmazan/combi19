@@ -1141,7 +1141,7 @@
 		   	}
 		}
         if($counter==0){
-            echo'<h3 style="color:white"> No hay viajes que coincidan con los criterios de búsqueda </h2>';
+            echo'<h3 style="color:white"> No hubieron usuarios rechazados por covid en los ultimos 30 días </h2>';
         }
 	}
 
@@ -1292,7 +1292,7 @@
                         echo "<a class='item'><p style='font-size:18px'>$str</p></a>";
                     }
                     else{
-                        echo'<h3 style="color:white"> No hubieron usuarios rechazados por covid en los ultimos 30 días </h3>';
+                        echo'<h3 style="color:white"> No hay viajes que coincidan con los criterios de búsqueda </h3>';
                         break;
                     }
 		        }
