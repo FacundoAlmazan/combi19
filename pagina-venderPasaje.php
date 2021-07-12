@@ -22,7 +22,7 @@
 	<h1 class="titulo"> VENDER PASAJE PRESENCIAL</h1>
 
 	<div class="content">
-		<form name="test" method="POST" onsubmit="return validarEdad()" action="db-vender.php?idViaje=<?php echo$idViaje?>">
+		<form name="test" method="POST" onsubmit="return validarVender()" action="db-vender.php?idViaje=<?php echo$idViaje?>">
 		   <h2>EMAIL</h2>
 		      <input id="email" type="text" class="campoTexto" name="email">
 			<h2>FECHA DE NACIMIENTO</h2>

@@ -150,6 +150,13 @@
           ?>
 		</div>
 	</div>
-    <script src="scripts/script-cancelarViaje.js"></script> 
+    <script>
+        window.onload = function(){
+            if (window.location.hash == "#agregado"){
+                alert("El pasaje se ha vendido con éxito");
+            }
+        }
+    </script>
+} 
 </body>
 </html>

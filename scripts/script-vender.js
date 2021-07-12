@@ -1,4 +1,13 @@
 var nacimiento=document.getElementById("nacimiento");
+var email= document.getElementById("email");
+
+function validarEmail(){
+	if(email.value==""){
+		alert("El email no puede estar vacío");
+		return false;
+	}
+	return true;
+}
 
 function validarEdad(){
 	if(nacimiento.value==""){
@@ -22,4 +31,8 @@ function validarEdad(){
 		return false;
 	}
 	return true;
+}
+
+function validarVender(){
+    return validarEmail() && validarEdad();
 }
