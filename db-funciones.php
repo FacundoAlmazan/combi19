@@ -1122,6 +1122,7 @@
 	}
 
     function listarPasajerosCovid(){
+        $counter=0;
         $datetime1 = new DateTime('2009-10-11');
         date_default_timezone_set('America/Argentina/Buenos_Aires');
         $back= date("Y-m-d",strtotime('-30 days'));
@@ -1135,11 +1136,12 @@
                         <p>usuario:';
                         echo $respuesta['nombreusuario'];
                     echo "</p></div></a>";
+                    $counter++;
                 }
 		   	}
 		}
-        else{
-            echo'<h3 style="color:white;">No hubieron usuarios rechazados por covid en los ultimos 30 días</h3>';
+        if($counter==0){
+            echo'<h3 style="color:white"> No hay viajes que coincidan con los criterios de búsqueda </h2>';
         }
 	}
 
@@ -1213,6 +1215,10 @@
                     if($boo){
                         echo "<a class='item'><p style='font-size:18px'>$str</p></a>";
                     }
+                    else{
+                        echo'<h3 style="color:white"> No hay viajes que coincidan con los criterios de búsqueda </h3>';
+                        break;
+                    }
 		        }
             }
         }
@@ -1284,6 +1290,10 @@
                     }
                     if($boo){
                         echo "<a class='item'><p style='font-size:18px'>$str</p></a>";
+                    }
+                    else{
+                        echo'<h3 style="color:white"> No hubieron usuarios rechazados por covid en los ultimos 30 días </h3>';
+                        break;
                     }
 		        }
             }
